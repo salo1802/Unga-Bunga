@@ -6,7 +6,7 @@ import processing.core.PImage;
 public class Obstacles {
 	
 	private PApplet app;
-	private PImage tiles; // there will be more than 1 typo of tile
+	private PImage obstacles; // there will be more than 1 typo of obstacles
 	
 	private int posX, posY;
 	

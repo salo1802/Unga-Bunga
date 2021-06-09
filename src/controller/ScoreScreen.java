@@ -8,7 +8,12 @@ public class ScoreScreen {
 	private PImage menu;
 	private PApplet app;
 	
-	public ScoreScreen() {
+	public ScoreScreen(PApplet app) {
+		this.app = app;
+		
+	}
+	
+	public void draw() {
 		
 	}
 	

@@ -8,7 +8,16 @@ public class GameScreen {
 	private PImage menu;
 	private PApplet app;
 	
-	public GameScreen() {
+	public GameScreen(PApplet app) {
+		this.app = app;
+		
+	}
+	
+	public void drawLevels() {
+		
+	}
+	
+	public void changeLevels() {
 		
 	}
 

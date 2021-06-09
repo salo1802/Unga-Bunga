@@ -6,7 +6,7 @@ import processing.core.PImage;
 public class PowerUps {
 	
 	private PApplet app;
-	private PImage tiles; // there will be more than 1 typo of tile
+	private PImage powers; // there will be more than 1 typo of powerUp
 	
 	private int posX, posY;
 	

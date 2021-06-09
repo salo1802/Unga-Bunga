@@ -8,7 +8,8 @@ public class MenuScreen {
 	private PImage menu;
 	private PApplet app;
 	
-	public MenuScreen() {
+	public MenuScreen(PApplet app) {
+		this.app = app;
 		
 	}
 	
