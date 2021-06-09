@@ -8,7 +8,9 @@ public class Enemies {
 	private PApplet app;
 	private PImage enemies; // there will be more than 1 enemie type, idk if we should use inheritance
 	
-	private int posX, posY, value, lifes, enemieType;
+	private int posX, posY, value, lifes; 
+	
+	private int enemieType;
 	
 	private boolean death;
 	

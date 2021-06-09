@@ -3,27 +3,32 @@ package model;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Obstacles {
+public class Tiles {
 	
 	private PApplet app;
 	private PImage tiles; // there will be more than 1 typo of tile
 	
 	private int posX, posY;
 	
-	private boolean contact, visibility;
+	private int tileType;
 	
-	public Obstacles(int posX, int posY, PApplet app) {
+	private boolean contact;
+	
+	public Tiles(int posX, int posY, int tileType, PApplet app) {
 		this.posX = posX;
 		this.posY = posY;
+		this.tileType = tileType;
 		this.app = app;
 		
-	}
-	
-	public void drawObstacles() {
+		contact = false;
 		
 	}
 	
-	public void interactions() { 
+	public void drawTile() { // same here as enemies maybe use a switch with tileType as key
+		
+	}
+	
+	public void interactions() {
 		
 	}
 
@@ -41,6 +46,14 @@ public class Obstacles {
 
 	public void setPosY(int posY) {
 		this.posY = posY;
+	}
+
+	public int getTileType() {
+		return tileType;
+	}
+
+	public void setTileType(int tileType) {
+		this.tileType = tileType;
 	}
 	
 	
