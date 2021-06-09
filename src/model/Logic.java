@@ -15,7 +15,7 @@ public class Logic {
 		
 	}
 	
-	public void sortScore() {
+	public void sortScores() {
 		
 	}
 
