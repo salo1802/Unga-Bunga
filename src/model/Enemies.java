@@ -8,18 +8,18 @@ public class Enemies {
 	private PApplet app;
 	private PImage enemies; // there will be more than 1 enemie type, idk if we should use inheritance
 	
-	private int posX, posY, value, lifes; 
+	private int posX, posY, value, lives; 
 	
 	private int enemieType;
 	
 	private boolean death;
 	
-	public Enemies(int posX, int posY, int value, int lifes, int tyenemieTypepe, PApplet app) {
+	public Enemies(int posX, int posY, int value, int lives, int enemieType, PApplet app) {
 		this.app = app;
 		this.posX = posX;
 		this.posY = posY;
 		this.value = value;
-		this.lifes = lifes;
+		this.lives = lives;
 		this.enemieType = enemieType; // idk if this int should be in the constructor 
 		
 		death = false;
@@ -61,12 +61,12 @@ public class Enemies {
 		this.value = value;
 	}
 
-	public int getLifes() {
-		return lifes;
+	public int getLives() {
+		return lives;
 	}
 
-	public void setLifes(int lifes) {
-		this.lifes = lifes;
+	public void setLives(int lives) {
+		this.lives = lives;
 	}
 
 	public int getEnemieType() {

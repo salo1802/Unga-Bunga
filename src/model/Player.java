@@ -8,16 +8,16 @@ public class Player implements Comparable<Player>{
 	private PApplet app;
 	private PImage player;
 	
-	private int posX, posY, score, lifes, vel;
+	private int posX, posY, score, lives, vel;
 	
 	private boolean gameOver;
 	
-	public Player(int posX, int posY, int score, int lifes, int vel, PApplet app) {
+	public Player(int posX, int posY, int score, int lives, int vel, PApplet app) {
 		this.app = app;
 		this.posX = posX;
 		this.posY = posY;
 		this.score = score;
-		this.lifes = lifes;
+		this.lives = lives;
 		this.vel = vel;
 		
 		gameOver = false;
@@ -60,12 +60,12 @@ public class Player implements Comparable<Player>{
 		this.score = score;
 	}
 
-	public int getLifes() {
-		return lifes;
+	public int getLives() {
+		return lives;
 	}
 
-	public void setLifes(int lifes) {
-		this.lifes = lifes;
+	public void setLives(int lives) {
+		this.lives = lives;
 	}
 
 	public int getVel() {
