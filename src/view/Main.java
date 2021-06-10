@@ -18,17 +18,14 @@ public class Main extends PApplet{
 	
 	@Override
 	public void setup() {
-		p = new Player(50, 100, 0, 5, 5, this);
+		p = new Player(50, 500, 0, 5, 5, this);
 	}
 	
 	@Override
 	public void draw() {
 		background(40);	
 		p.drawPlayer();
-		if(p.isFalling()) {
-			new Thread(p).start();
-		}
-		
+		p.manageGravity();
 	}
 	
 	@Override
@@ -36,16 +33,16 @@ public class Main extends PApplet{
 		
 		switch(key) {
 		case 'a':
-			p.movement(-10);
+			p.movement(-15);
 			break;
 		case 'd':
-			p.movement(10);
+			p.movement(15);
 			break;
 		case 32:
-			p.setFalling(false);
+			p.setJumpJump(true);
+			new Thread(p).start();
 			p.setGravity(10);
 			p.jump();
-			p.setFalling(true);
 			break;
 		}
 	}

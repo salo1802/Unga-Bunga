@@ -10,11 +10,13 @@ public class Player implements Comparable<Player>, Runnable{
 	
 	private int posX, posY, score, lives, vel;
 	//
-	private int gravity, jumpFactor;
+	private int gravity;
 	private int fallTime;
-	private boolean falling;
-	private boolean jumping;
+
 	//
+	
+	private boolean jumpJump;
+	private float jumpTime;
 	
 	private boolean gameOver;
 	
@@ -28,29 +30,31 @@ public class Player implements Comparable<Player>, Runnable{
 		gravity = 3;
 		
 		gameOver = false;
-		falling = true;
-		fallTime = 0;
-		jumpFactor = 0;
+		
+		jumpJump = false;
+		jumpTime = 0;
+		
 	}
 	
 	public void drawPlayer() {
 		app.circle(posX, posY, 50);
+		jump();
 	}
 	
 	public void movement(int vel) {
 		posX+=vel;
+
 	}
 	
 	public void jump() {
-		jumpFactor = 150;
-		jumping = true;
-		if(jumping) {
-			jumpFactor--;
-			if(jumpFactor == 0) {
-				jumpFactor=150;
-			}
-			//gravity=-100;
+		
+		if(jumpJump) {
+			posY -=40;
+			jumpTime ++;
+		}else {
+			posY +=5;
 		}
+
 	}
 	
 	public void manageGravity() {
@@ -64,7 +68,7 @@ public class Player implements Comparable<Player>, Runnable{
 				}
 				
 				posY+=gravity;
-				Thread.sleep(1000);
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -73,9 +77,13 @@ public class Player implements Comparable<Player>, Runnable{
 	
 	@Override
 	public void run() {
-		manageGravity();
-		if(!falling) {
-			jump();
+		
+		jump();
+		try {
+			Thread.sleep(200);
+			jumpJump = false;
+		} catch (InterruptedException  e) {
+			e.printStackTrace();
 		}
 		
 	}
@@ -130,14 +138,6 @@ public class Player implements Comparable<Player>, Runnable{
 		return 0;
 	}
 
-	public boolean isFalling() {
-		return falling;
-	}
-
-	public void setFalling(boolean falling) {
-		this.falling = falling;
-	}
-
 	public int getGravity() {
 		return gravity;
 	}
@@ -146,16 +146,18 @@ public class Player implements Comparable<Player>, Runnable{
 		this.gravity = gravity;
 	}
 
-	public boolean isJumping() {
-		return jumping;
+	public boolean isJumpJump() {
+		return jumpJump;
 	}
 
-	public void setJumping(boolean jumping) {
-		this.jumping = jumping;
+	public void setJumpJump(boolean jumpJump) {
+		this.jumpJump = jumpJump;
 	}
 
 	
 	//////////////////////
+	
+	
 	
 
 }
