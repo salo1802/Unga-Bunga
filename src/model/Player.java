@@ -12,6 +12,7 @@ public class Player implements Comparable<Player>, Runnable{
 	//
 	private int gravity, jumpFactor;
 	private int fallTime;
+	private int invulnerableTime;
 	private boolean falling;
 	private boolean jumping;
 	//
@@ -30,11 +31,14 @@ public class Player implements Comparable<Player>, Runnable{
 		gameOver = false;
 		falling = true;
 		fallTime = 0;
-		jumpFactor = 0;
 	}
 	
 	public void drawPlayer() {
+		app.fill(220);
 		app.circle(posX, posY, 50);
+		if(invulnerableTime > 0) {
+			invulnerableTime --;
+		}
 	}
 	
 	public void movement(int vel) {
@@ -42,42 +46,29 @@ public class Player implements Comparable<Player>, Runnable{
 	}
 	
 	public void jump() {
-		jumpFactor = 150;
-		jumping = true;
-		if(jumping) {
-			jumpFactor--;
-			if(jumpFactor == 0) {
-				jumpFactor=150;
-			}
-			//gravity=-100;
-		}
+		jumpFactor = -10;
+		gravity = 3;
+		fallTime = 0;
 	}
 	
 	public void manageGravity() {
 		if(posY < 800) {
-			try {
-				fallTime++;
-				if(fallTime==15) {
-					gravity+=gravity/2;
-					fallTime= 0;
-					System.out.println("GOTTA GO FAST");
-				}
-				
-				posY+=gravity;
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			fallTime++;
+			if(fallTime==15) {
+				gravity+=gravity/2;
+				fallTime= 0;
 			}
+			posY+=gravity+jumpFactor;
+		}else {
+			posY=799;
+			gravity = 0;
+			jumpFactor = 0;
 		}
 	}
 	
 	@Override
 	public void run() {
-		manageGravity();
-		if(!falling) {
-			jump();
-		}
-		
+		manageGravity();		
 	}
 	
 	public void actions() {
@@ -113,7 +104,11 @@ public class Player implements Comparable<Player>, Runnable{
 	}
 
 	public void setLives(int lives) {
-		this.lives = lives;
+		if(invulnerableTime == 0) {
+			this.lives = lives;
+			invulnerableTime = 60;
+		}
+		
 	}
 
 	public int getVel() {
