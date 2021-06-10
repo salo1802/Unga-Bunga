@@ -2,31 +2,36 @@ package model;
 
 import processing.core.*;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 //import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
+
 import processing.core.PApplet;
 
 
 public class Logic {
 
 	private Player player;
-	private Enemies enemies;
-	private Tiles tiles;
-	private Obstacles obstacles;
+	private Enemy enemies;
+	private Tile tiles;
+	private Obstacle obstacles;
 	private PowerUp powerup;
 
 	private ArrayList<Player> highscores;
 
-	public final static String URL_SAVE_HIGHSCORES = "./txts/highcores.txt";
+	public final static String URL_SAVE_HIGHSCORES = "./data/users.txt";
 
 	//private PrintWriter escribir;
 	
 
 
-	public Logic(Player player, Enemies enemies, Tiles tiles, Obstacles obstacles, PowerUp powerup,
+	public Logic(Player player, Enemy enemies, Tile tiles, Obstacle obstacles, PowerUp powerup,
 			ArrayList<Player> highscores) {
 		super();
 		this.player = player;
@@ -41,6 +46,10 @@ public class Logic {
 		highscores.add(a);
 	}
 
+	
+	/*
+	 * Este método se utiliza para producir el archivo de texto plano con los datos del jugador
+	 */
 	public void saveHighscoreTxt() throws IOException {
 
 		
@@ -49,7 +58,7 @@ public class Logic {
 
 		for (int i = 0; i < highscores.size(); i++) {
 			String linea = highscores.get(i).getUsername() + "," + highscores.get(i).getScore() + ","
-					+ highscores.get(i).getPlayTime() + "," + highscores.get(i).getGameDate().toString();
+					+ highscores.get(i).getPlayTime() + "," + highscores.get(i).getGameDate();
 			try {
 				buffer.write(linea);
 			} catch (IOException e) {
@@ -65,6 +74,31 @@ public class Logic {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	/*
+	 * En este método de FileReader se utiliza para transformar el texto plano en arreglo
+	 */
+	public void loadHighscore() throws NumberFormatException, IOException {
+		
+		BufferedReader br = new BufferedReader(new FileReader(URL_SAVE_HIGHSCORES));
+		
+		String r;
+		while((r = br.readLine()) != null) {
+			String[] g = r.split(",");
+			Player w = new Player(g[0], Integer.parseInt(g[1]), Integer.parseInt(g[2]), g[3]);
+			highscores.add(w);
+			
+		}
+		
+	
+		try {
+			br.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public Player getPlayer() {
 		return player;
@@ -74,27 +108,27 @@ public class Logic {
 		this.player = player;
 	}
 
-	public Enemies getEnemies() {
+	public Enemy getEnemies() {
 		return enemies;
 	}
 
-	public void setEnemies(Enemies enemies) {
+	public void setEnemies(Enemy enemies) {
 		this.enemies = enemies;
 	}
 
-	public Tiles getTiles() {
+	public Tile getTiles() {
 		return tiles;
 	}
 
-	public void setTiles(Tiles tiles) {
+	public void setTiles(Tile tiles) {
 		this.tiles = tiles;
 	}
 
-	public Obstacles getObstacles() {
+	public Obstacle getObstacles() {
 		return obstacles;
 	}
 
-	public void setObstacles(Obstacles obstacles) {
+	public void setObstacles(Obstacle obstacles) {
 		this.obstacles = obstacles;
 	}
 

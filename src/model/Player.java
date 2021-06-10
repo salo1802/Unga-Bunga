@@ -16,7 +16,7 @@ public class Player {
 	private boolean gameOver;
 	private PImage Helga;
 	private PApplet app;
-	private Date gameDate;
+	private String gameDate;
 	private int playTime;
 	private String username;
 
@@ -29,7 +29,7 @@ public class Player {
 	private long endGameTime;
 
 	public Player(String sound, int posX, int posY, int score, int lives, int vel, boolean gameOver, PImage helga,
-			PApplet app, Date gameDate, int playTime, long startGameTime, long endGameTime, String username) {
+			PApplet app, String gameDate, int playTime, long startGameTime, long endGameTime, String username) {
 		super();
 		this.sound = sound;
 		this.posX = posX;
@@ -44,6 +44,15 @@ public class Player {
 		this.playTime = playTime;
 		this.startGameTime = startGameTime;
 		this.endGameTime = endGameTime;
+		this.username = username;
+	}
+	
+	
+	public Player(String username, int score, int playTime, String gameDate) {
+		super();
+		this.score = score;
+		this.gameDate = gameDate;
+		this.playTime = playTime;
 		this.username = username;
 	}
 
@@ -157,11 +166,11 @@ public class Player {
 		this.app = app;
 	}
 
-	public Date getGameDate() {
+	public String getGameDate() {
 		return gameDate;
 	}
 
-	public void setGameDate(Date gameDate) {
+	public void setGameDate(String gameDate) {
 		this.gameDate = gameDate;
 	}
 
