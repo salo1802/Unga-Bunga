@@ -15,7 +15,10 @@ public class Player implements Comparable<Player>, Runnable{
 	private int invulnerableTime;
 	private boolean falling;
 	private boolean jumping;
-	//
+
+	
+	private boolean jumpJump;
+	private float jumpTime;
 	
 	private boolean gameOver;
 	
@@ -31,6 +34,10 @@ public class Player implements Comparable<Player>, Runnable{
 		gameOver = false;
 		falling = true;
 		fallTime = 0;
+		
+		jumpJump = false;
+		jumpTime = 0;
+		
 	}
 	
 	public void drawPlayer() {
@@ -39,10 +46,12 @@ public class Player implements Comparable<Player>, Runnable{
 		if(invulnerableTime > 0) {
 			invulnerableTime --;
 		}
+
 	}
 	
 	public void movement(int vel) {
 		posX+=vel;
+
 	}
 	
 	public void jump() {
@@ -125,14 +134,6 @@ public class Player implements Comparable<Player>, Runnable{
 		return 0;
 	}
 
-	public boolean isFalling() {
-		return falling;
-	}
-
-	public void setFalling(boolean falling) {
-		this.falling = falling;
-	}
-
 	public int getGravity() {
 		return gravity;
 	}
@@ -141,16 +142,18 @@ public class Player implements Comparable<Player>, Runnable{
 		this.gravity = gravity;
 	}
 
-	public boolean isJumping() {
-		return jumping;
+	public boolean isJumpJump() {
+		return jumpJump;
 	}
 
-	public void setJumping(boolean jumping) {
-		this.jumping = jumping;
+	public void setJumpJump(boolean jumpJump) {
+		this.jumpJump = jumpJump;
 	}
 
 	
 	//////////////////////
+	
+	
 	
 
 }

@@ -36,7 +36,7 @@ public class Main extends PApplet{
 		p.drawPlayer();
 		d.drawEenemy();
 		//if(p.isFalling()) {
-			new Thread(p).start();
+		new Thread(p).start();
 		//}
 		if(moveL) {
 			p.movement(-5);
