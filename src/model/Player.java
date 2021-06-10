@@ -3,12 +3,18 @@ package model;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Player implements Comparable<Player>{
+public class Player implements Comparable<Player>, Runnable{
 	
 	private PApplet app;
 	private PImage player;
 	
 	private int posX, posY, score, lives, vel;
+	//
+	private int gravity, jumpFactor;
+	private int fallTime;
+	private boolean falling;
+	private boolean jumping;
+	//
 	
 	private boolean gameOver;
 	
@@ -19,16 +25,58 @@ public class Player implements Comparable<Player>{
 		this.score = score;
 		this.lives = lives;
 		this.vel = vel;
+		gravity = 3;
 		
 		gameOver = false;
-		
+		falling = true;
+		fallTime = 0;
+		jumpFactor = 0;
 	}
 	
 	public void drawPlayer() {
-		
+		app.circle(posX, posY, 50);
 	}
 	
-	public void movement() {
+	public void movement(int vel) {
+		posX+=vel;
+	}
+	
+	public void jump() {
+		jumpFactor = 150;
+		jumping = true;
+		if(jumping) {
+			jumpFactor--;
+			if(jumpFactor == 0) {
+				jumpFactor=150;
+			}
+			//gravity=-100;
+		}
+	}
+	
+	public void manageGravity() {
+		if(posY < 800) {
+			try {
+				fallTime++;
+				if(fallTime==15) {
+					gravity+=gravity/2;
+					fallTime= 0;
+					System.out.println("GOTTA GO FAST");
+				}
+				
+				posY+=gravity;
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Override
+	public void run() {
+		manageGravity();
+		if(!falling) {
+			jump();
+		}
 		
 	}
 	
@@ -81,5 +129,33 @@ public class Player implements Comparable<Player>{
 		
 		return 0;
 	}
+
+	public boolean isFalling() {
+		return falling;
+	}
+
+	public void setFalling(boolean falling) {
+		this.falling = falling;
+	}
+
+	public int getGravity() {
+		return gravity;
+	}
+
+	public void setGravity(int gravity) {
+		this.gravity = gravity;
+	}
+
+	public boolean isJumping() {
+		return jumping;
+	}
+
+	public void setJumping(boolean jumping) {
+		this.jumping = jumping;
+	}
+
+	
+	//////////////////////
+	
 
 }
