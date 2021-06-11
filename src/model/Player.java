@@ -10,10 +10,12 @@ public class Player implements Comparable<Player>, Runnable{
 	
 	private int posX, posY, score, lives, vel;
 	//
-	private int gravity;
+	private int gravity, jumpFactor;
 	private int fallTime;
+	private int invulnerableTime;
+	private boolean falling;
+	private boolean jumping;
 
-	//
 	
 	private boolean jumpJump;
 	private float jumpTime;
@@ -30,6 +32,8 @@ public class Player implements Comparable<Player>, Runnable{
 		gravity = 3;
 		
 		gameOver = false;
+		falling = true;
+		fallTime = 0;
 		
 		jumpJump = false;
 		jumpTime = 0;
@@ -37,8 +41,12 @@ public class Player implements Comparable<Player>, Runnable{
 	}
 	
 	public void drawPlayer() {
+		app.fill(220);
 		app.circle(posX, posY, 50);
-		jump();
+		if(invulnerableTime > 0) {
+			invulnerableTime --;
+		}
+
 	}
 	
 	public void movement(int vel) {
@@ -47,45 +55,29 @@ public class Player implements Comparable<Player>, Runnable{
 	}
 	
 	public void jump() {
-		
-		if(jumpJump) {
-			posY -=40;
-			jumpTime ++;
-		}else {
-			posY +=5;
-		}
-
+		jumpFactor = -10;
+		gravity = 3;
+		fallTime = 0;
 	}
 	
 	public void manageGravity() {
 		if(posY < 800) {
-			try {
-				fallTime++;
-				if(fallTime==15) {
-					gravity+=gravity/2;
-					fallTime= 0;
-					System.out.println("GOTTA GO FAST");
-				}
-				
-				posY+=gravity;
-				Thread.sleep(10);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			fallTime++;
+			if(fallTime==15) {
+				gravity+=gravity/2;
+				fallTime= 0;
 			}
+			posY+=gravity+jumpFactor;
+		}else {
+			posY=799;
+			gravity = 0;
+			jumpFactor = 0;
 		}
 	}
 	
 	@Override
 	public void run() {
-		
-		jump();
-		try {
-			Thread.sleep(200);
-			jumpJump = false;
-		} catch (InterruptedException  e) {
-			e.printStackTrace();
-		}
-		
+		manageGravity();		
 	}
 	
 	public void actions() {
@@ -121,7 +113,11 @@ public class Player implements Comparable<Player>, Runnable{
 	}
 
 	public void setLives(int lives) {
-		this.lives = lives;
+		if(invulnerableTime == 0) {
+			this.lives = lives;
+			invulnerableTime = 60;
+		}
+		
 	}
 
 	public int getVel() {
