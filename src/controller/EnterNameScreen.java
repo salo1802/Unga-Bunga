@@ -3,17 +3,17 @@ package controller;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class IntroScreen {
+public class EnterNameScreen {
 	
-	private PImage intros;
+	private PImage nameScreen;
 	private PApplet app;
 	
-	public IntroScreen(PApplet app) {
+	public EnterNameScreen(PApplet app) {
 		this.app = app;
 		
 	}
 	
-	public void draw() {
+	public void draw(){
 		
 	}
 

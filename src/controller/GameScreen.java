@@ -5,7 +5,7 @@ import processing.core.PImage;
 
 public class GameScreen {
 	
-	private PImage menu;
+	private PImage game;
 	private PApplet app;
 	
 	public GameScreen(PApplet app) {
