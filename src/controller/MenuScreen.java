@@ -11,9 +11,13 @@ public class MenuScreen {
 	public MenuScreen(PApplet app) {
 		this.app = app;
 		
+		menu = app.loadImage("data/startScreen.png");
+		
 	}
 	
 	public void draw(){
+		
+		app.image(menu, 0, 0, 1080, 920);
 		
 	}
 

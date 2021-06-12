@@ -5,15 +5,19 @@ import processing.core.PImage;
 
 public class ScoreScreen {
 	
-	private PImage menu;
+	private PImage score;
 	private PApplet app;
 	
 	public ScoreScreen(PApplet app) {
 		this.app = app;
 		
+		score = app.loadImage("data/highscoresScreen.png");
+		
 	}
 	
 	public void draw() {
+		
+		app.image(score, 0, 0, 1080, 920);
 		
 	}
 	

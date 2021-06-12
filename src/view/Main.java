@@ -1,6 +1,7 @@
 package view;
 import javax.tools.Diagnostic;
 
+import controller.MainController;
 import model.Dinasour;
 import model.Enemy;
 import model.Player;
@@ -10,6 +11,8 @@ public class Main extends PApplet{
 
 	Player p;
 	Dinasour d;
+	MainController controller;
+	
 	boolean moveR, moveL;
 	
 	public static void main(String[] args) {
@@ -25,10 +28,13 @@ public class Main extends PApplet{
 	public void setup() {
 		p = new Player(50, 100, 0, 5, 3, this);
 		d = new Dinasour(100, 800, 20, 1, this, 50);
+		
+		controller = new MainController(this);
 	}
 	
 	@Override
 	public void draw() {
+		
 		background(40);	
 		textSize(20);
 		fill(255);
@@ -48,6 +54,8 @@ public class Main extends PApplet{
 		if(dist(p.getPosX(), p.getPosY(), d.getPosX(), d.getPosY()) < 30) {
 			p.setLives(p.getLives()-1);
 		}
+		
+		controller.drawScreens();
 	}
 	
 	@Override

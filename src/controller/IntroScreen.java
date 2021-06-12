@@ -11,9 +11,12 @@ public class IntroScreen {
 	public IntroScreen(PApplet app) {
 		this.app = app;
 		
+		//intros = app.loadImage("data/");		
 	}
 	
 	public void draw() {
+		
+		//app.image(intros, 0, 0, 1080, 920);
 		
 	}
 
