@@ -34,6 +34,8 @@ public class Main extends PApplet{
 	@Override
 	public void draw() {
 		
+		//System.out.println(mouseX + "," + mouseY);
+		
 		background(40);	
 		textSize(20);
 		fill(255);
@@ -101,7 +103,7 @@ public class Main extends PApplet{
 	
 	@Override
 	public void mousePressed() {
-		
+		controller.changeScreens(mouseX, mouseY);
 	}
 	
 	@Override
