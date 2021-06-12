@@ -4,7 +4,6 @@ import model.Level1;
 import model.Level2;
 import model.Level3;
 import processing.core.PApplet;
-import processing.core.PImage;
 
 public class Levels {
 	
@@ -18,7 +17,7 @@ public class Levels {
 	
 	private boolean changeLevel1, changeLevel2, changeLevel3;
 	
-	public Levels(PApplet app) { // idk if we should use inheritance
+	public Levels(PApplet app) {
 		this.app = app;
 		
 		levelNumber = 1; //1 = level 1, 2 = level 2, 3 = level 3
