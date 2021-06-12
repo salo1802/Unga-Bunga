@@ -54,7 +54,7 @@ public class Main extends PApplet{
 			p.setLives(p.getLives()-1);
 		}
 		
-		controller.drawScreens();
+		//controller.drawScreens();
 	}
 	
 	@Override
@@ -62,12 +62,20 @@ public class Main extends PApplet{
 		
 		switch(key) {
 		case 'a': 
+			if(!p.getState().equals(p.JUMP)) {
+				p.setState(p.WALK);
+			}			
 			moveL = true;
 			break;
 		case 'd':
+			if(!p.getState().equals(p.JUMP)) {
+				p.setState(p.WALK);
+			}
 			moveR = true;
 			break;
 		case 32:
+			p.setMovTimer(0);
+			p.setState(p.JUMP);
 			p.jump();
 			break;
 		}

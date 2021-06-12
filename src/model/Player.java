@@ -5,20 +5,26 @@ import processing.core.PImage;
 
 public class Player implements Comparable<Player>, Runnable{
 	
+	public final static String WALK = "walk";
+	public final static String JUMP = "jump";
+	public final static String CLIMB = "climb";
+	public final static String DEFAULT = "default";
+	
 	private PApplet app;
-	private PImage player;
+	private PImage playerStand;
+	private PImage[] imagesRunning;
+	private PImage[] imagesCliming;
+	private PImage[] imagesjumping;
 	
 	private int posX, posY, score, lives, vel;
 	//
 	private int gravity, jumpFactor;
 	private int fallTime;
 	private int invulnerableTime;
-	private boolean falling;
-	private boolean jumping;
-
+	private String state;
+	private int movTimer, runTimer;
 	
 	private boolean jumpJump;
-	private float jumpTime;
 	
 	private boolean gameOver;
 	
@@ -30,25 +36,106 @@ public class Player implements Comparable<Player>, Runnable{
 		this.lives = lives;
 		this.vel = vel;
 		gravity = 3;
+		state = "stand";
 		
 		gameOver = false;
-		falling = true;
 		fallTime = 0;
 		
 		jumpJump = false;
-		jumpTime = 0;
 		
+		movTimer = 0;
+		runTimer = 0;
+		imagesjumping = new PImage[6];
+		imagesCliming = new PImage[2];
+		imagesRunning = new PImage[4];
+		loadImages();
 	}
 	
+	private void loadImages() {
+		playerStand = app.loadImage("data/stand.png");
+		
+		for (int i = 0; i < imagesCliming.length; i++) {
+			imagesCliming[i] = app.loadImage("data/climb"+(i+1)+".png");
+		}
+		
+		for (int i = 0; i < imagesjumping.length; i++) {
+			imagesjumping[i] = app.loadImage("data/jump"+(i+1)+".png");
+		}
+		
+		for (int i = 0; i < imagesRunning.length; i++) {
+			imagesRunning[i] = app.loadImage("data/walk"+(i+1)+".png");
+		}
+	}
+
 	public void drawPlayer() {
-		app.fill(220);
-		app.circle(posX, posY, 50);
+		//app.fill(220);
+		//app.circle(posX, posY, 50);
+		switch(state) {
+		case WALK:
+			walkAnimation();
+			break;
+		case JUMP:
+			jumpAnimation();
+			break;
+		case CLIMB:
+			climbAnimation();
+			break;
+		default:
+			app.image(playerStand, posX, posY);
+			break;
+		}
+		
 		if(invulnerableTime > 0) {
 			invulnerableTime --;
 		}
-
+		System.out.println(movTimer);
 	}
 	
+	private void climbAnimation() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void jumpAnimation() {
+		if(movTimer >=0 && movTimer <20) {
+			app.image(imagesjumping[0], posX, posY);
+		}else if(movTimer >=20 && movTimer < 40) {
+			app.image(imagesjumping[1], posX, posY);
+		}else if(movTimer >=40 && movTimer <55) {
+			app.image(imagesjumping[2], posX, posY);
+		}else if(movTimer >=55 && movTimer <70) {
+			app.image(imagesjumping[3], posX, posY);
+		}else if(movTimer >=70 && movTimer <85) {
+			app.image(imagesjumping[4], posX, posY);
+		}else if(movTimer >=85 && movTimer <100) {
+			app.image(imagesjumping[5], posX, posY);
+		}
+		movTimer++;
+		
+		if(movTimer>100) {
+			movTimer = 0;
+			state = DEFAULT;
+		}
+	}
+
+	private void walkAnimation() {
+		if(runTimer >=0 && runTimer < 10) {
+			app.image(imagesRunning[0], posX, posY);
+		}else if(runTimer >=10 && runTimer < 20) {
+			app.image(imagesRunning[1], posX, posY);
+		}else if(runTimer >=20 && runTimer <30) {
+			app.image(imagesRunning[2], posX, posY);
+		}else if(runTimer >=30 && runTimer <40) {
+			app.image(imagesRunning[3], posX, posY);
+		}
+		runTimer++;
+		
+		if(runTimer == 40) {
+			runTimer = 0;
+			state = DEFAULT;
+		}
+	}
+
 	public void movement(int vel) {
 		posX+=vel;
 
@@ -148,6 +235,22 @@ public class Player implements Comparable<Player>, Runnable{
 
 	public void setJumpJump(boolean jumpJump) {
 		this.jumpJump = jumpJump;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public int getMovTimer() {
+		return movTimer;
+	}
+
+	public void setMovTimer(int movTimer) {
+		this.movTimer = movTimer;
 	}
 
 	
