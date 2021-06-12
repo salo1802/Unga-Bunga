@@ -1,12 +1,18 @@
 package controller;
 
+import model.Level1;
+import model.Level2;
+import model.Level3;
 import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Levels {
 	
-	private PImage level1;
 	private PApplet app;
+	
+	private Level1 level1;
+	private Level2 level2;
+	private Level3 level3;
 	
 	private int levelNumber;
 	
@@ -17,14 +23,17 @@ public class Levels {
 		
 		levelNumber = 1; //1 = level 1, 2 = level 2, 3 = level 3
 		
-		level1 = app.loadImage("data/nivel1.png");
+		level1 = new Level1(app);
+		level2 = new Level2(app);
+		level3 = new Level3(app);
+		
 	}
 	
 	public void drawLevels() {
 		
 		switch (levelNumber) {
 		case 1:
-			app.image(level1, 0, 0);
+			level1.draw();
 			break;
 
 		default:
