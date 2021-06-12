@@ -38,7 +38,7 @@ public class MainController {
 			introscreen.draw();
 			break;
 		case 2:
-			gamescreen.drawLevels();
+			gamescreen.drawLevel();
 		case 3:
 			namescreen.draw();
 			break;

@@ -5,7 +5,7 @@ import model.Level2;
 import model.Level3;
 import processing.core.PApplet;
 
-public class Levels {
+public class Level {
 	
 	private PApplet app;
 	
@@ -17,7 +17,7 @@ public class Levels {
 	
 	private boolean changeLevel1, changeLevel2, changeLevel3;
 	
-	public Levels(PApplet app) {
+	public Level(PApplet app) {
 		this.app = app;
 		
 		levelNumber = 1; //1 = level 1, 2 = level 2, 3 = level 3
@@ -28,7 +28,7 @@ public class Levels {
 		
 	}
 	
-	public void drawLevels() {
+	public void drawLevel() {
 		
 		switch (levelNumber) {
 		case 1:

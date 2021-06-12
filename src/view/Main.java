@@ -1,5 +1,4 @@
 package view;
-import javax.tools.Diagnostic;
 
 import controller.MainController;
 import model.Dinasour;

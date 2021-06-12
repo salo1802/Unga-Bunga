@@ -5,19 +5,19 @@ import processing.core.PImage;
 
 public class GameScreen {
 	
-	private Levels levels;
+	private Level level;
 	private PApplet app;
 	
 	public GameScreen(PApplet app) {
 		this.app = app;
 		
-		levels = new Levels(app);
+		level = new Level(app);
 		
 	}
 	
-	public void drawLevels() {
+	public void drawLevel() {
 		
-		levels.drawLevels();
+		level.drawLevel();
 		
 	}
 
