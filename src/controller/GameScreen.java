@@ -125,6 +125,6 @@ public class GameScreen {
 	public void setLevel1(Level1 level1) {
 		this.level1 = level1;
 	}
-
+	
 	
 }

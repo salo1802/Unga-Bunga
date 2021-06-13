@@ -42,6 +42,14 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 			
 			eggTimer = 60;
 			}
+		
+		for (int i = 0; i < theroProject.size(); i++) {
+			
+			if(theroProject.get(i).getPosY() > 920) {
+				theroProject.remove(i);
+				System.out.println("help");
+			}
+		}
 		}
 
 	@Override
@@ -85,5 +93,15 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 		}
 		
 	}
+
+	public ArrayList<TheroProject> getTheroProject() {
+		return theroProject;
+	}
+
+	public void setTheroProject(ArrayList<TheroProject> theroProject) {
+		this.theroProject = theroProject;
+	}
+	
+	
 
 }
