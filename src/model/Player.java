@@ -1,6 +1,7 @@
 package model;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PImage;
 
 public class Player implements Comparable<Player>, Runnable{
@@ -153,6 +154,7 @@ public class Player implements Comparable<Player>, Runnable{
 	private void walkAnimation() {
 		if(runTimer >=0 && runTimer < 10) {
 			if(rightAnimation==true) {
+			app.imageMode(PConstants.CENTER);
 			app.image(imagesRunning[0], posX, posY);
 		}else if(runTimer >=10 && runTimer < 20) {
 			app.image(imagesRunning[1], posX, posY);
@@ -165,14 +167,14 @@ public class Player implements Comparable<Player>, Runnable{
 		if(runTimer >=0 && runTimer < 10) {
 			if(rightAnimation==false) {
 			app.push();
-			app.rotateY(180);
-			app.image(imagesRunning[0], posX, posY);
+			app.imageMode(PConstants.CORNERS);
+			app.image(imagesRunning[0], posX+65, posY-62,posX-65, posY+63);
 		}else if(runTimer >=10 && runTimer < 20) {
-			app.image(imagesRunning[1], posX, posY);
+			app.image(imagesRunning[1], posX+68, posY-62,posX-67,posY+63);
 		}else if(runTimer >=20 && runTimer <30) {
-			app.image(imagesRunning[2], posX, posY);
+			app.image(imagesRunning[2], posX+64, posY-66,posX+64,posY+66);
 		}else if(runTimer >=30 && runTimer <40) {
-			app.image(imagesRunning[3], posX, posY);
+			app.image(imagesRunning[3], posX+58, posY-65,posX-59,posY+65);
 		app.pop();}}
 		
 		runTimer++;
