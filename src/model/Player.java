@@ -136,8 +136,11 @@ public class Player implements Comparable<Player>, Runnable{
 		int height = gameScreen.getLevel1().getObX().getHeight()/2;
 		if(posY+gravity>= objPy-height && posX > objPx-length && posX < objPx+length && posY < objPy) {
 			gravity = 0;
-			jumpFactor = 0;
+			if(!test) {
+				jumpFactor = 0;
+			}
 			test = true;
+			posY = objPy-height;
 		}else
 			if(test) {
 				gravity = 3;
