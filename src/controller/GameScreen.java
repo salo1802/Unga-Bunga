@@ -18,7 +18,6 @@ public class GameScreen {
 	private Level3 level3;
 	private Player p;
 	private Therodactyl thero;
-	private TheroProject tp;
 	
 	boolean moveR, moveL;
 	
@@ -87,11 +86,15 @@ public class GameScreen {
 	public void damagePlayer() {
 		
 		//eggs damage
+		for (int i = 0; i < thero.getTheroProject().size(); i++) {
 		
-//		if((int) PApplet.dist(p.getPosX(), p.getPosY(), tp.getPosX(), tp.getPosY()) < 25) {
-//			p.setLives(p.getLives()-1);
-//		}
-		
+			if((int) PApplet.dist(p.getPosX(), p.getPosY(), 
+					thero.getTheroProject().get(i).getPosX(), 
+					thero.getTheroProject().get(i).getPosY()) < 25) {
+				p.setLives(p.getLives()-1);
+				thero.getTheroProject().remove(i);
+			}
+		}
 	}
 	
 	public Player getP() {
