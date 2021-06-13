@@ -98,4 +98,13 @@ public class MainController {
 		}
 	}
 
+	public GameScreen getGamescreen() {
+		return gamescreen;
+	}
+
+	public void setGamescreen(GameScreen gamescreen) {
+		this.gamescreen = gamescreen;
+	}
+
+	
 }
