@@ -299,4 +299,7 @@ public class Player implements Comparable<Player>, Runnable{
 	public void setMovTimer(int movTimer) {
 		this.movTimer = movTimer;
 	}
+	public void setRightAnimation(boolean rightAnimation) {
+		this.rightAnimation = rightAnimation;
+	}
 }
