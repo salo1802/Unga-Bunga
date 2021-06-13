@@ -60,10 +60,9 @@ public class Main extends PApplet{
 			p.setLives(p.getLives()-1);
 		}
 		
-<<<<<<< HEAD
-=======
+
 		controller.drawScreens();
->>>>>>> 346ad75b38854da103654614490414076cc2fedc
+
 	}
 	
 	@Override

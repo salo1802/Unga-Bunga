@@ -4,7 +4,7 @@ import processing.core.PApplet;
 
 public class Dinasour extends Enemy implements EnemyCommonActions{
 
-	private int objX;		//Position on X axis of player
+	private int objX; //Position on X axis of player
 	private int speed;
 	
 	public Dinasour(int posX, int posY, int value, int lives, PApplet app, int objX) {
