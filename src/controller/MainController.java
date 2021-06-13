@@ -43,18 +43,20 @@ public class MainController {
 			introscreen.draw();
 			
 			//text 
-			textTimer --;
-			if(textTimer <= 0) {
-				app.textSize(30);
-				app.fill(0);
-				app.text("Press anywhere to begin", 30, 30);
-				textTimer = 30;
-			}
+//			textTimer --;
+//			if(textTimer <= 0) {
+//				app.textSize(30);
+//				app.fill(0);
+//				app.text("Press anywhere to begin", 30, 30);
+//				textTimer = 30;
+//			}
+			
 			break;
 		case 2:
 			gamescreen.drawLevel();
+			break;
 		case 3:
-			//namescreen.draw();
+			namescreen.draw();
 			break;
 		case 4:
 			scorescreen.draw();
