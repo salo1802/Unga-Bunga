@@ -25,7 +25,6 @@ public class Player implements Comparable<Player>, Runnable{
 	private int movTimer, runTimer, climbTimer;
 	
 	private boolean jumpJump;
-	
 	private boolean gameOver;
 	
 	public Player(int posX, int posY, int score, int lives, int vel, PApplet app) {
@@ -36,7 +35,7 @@ public class Player implements Comparable<Player>, Runnable{
 		this.lives = lives;
 		this.vel = vel;
 		gravity = 3;
-		state = "stand";
+		state = DEFAULT;
 		
 		gameOver = false;
 		fallTime = 0;
@@ -69,8 +68,7 @@ public class Player implements Comparable<Player>, Runnable{
 	}
 
 	public void drawPlayer() {
-		//app.fill(220);
-		//app.circle(posX, posY, 50);
+		
 		switch(state) {
 		case WALK:
 			walkAnimation();
@@ -89,6 +87,9 @@ public class Player implements Comparable<Player>, Runnable{
 		if(invulnerableTime > 0) {
 			invulnerableTime --;
 		}
+		
+		//app.fill(220);
+		//app.circle(posX, posY, 50);
 	}
 	
 	private void climbAnimation() {
@@ -261,11 +262,4 @@ public class Player implements Comparable<Player>, Runnable{
 	public void setMovTimer(int movTimer) {
 		this.movTimer = movTimer;
 	}
-
-	
-	//////////////////////
-	
-	
-	
-
 }

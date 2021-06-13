@@ -2,7 +2,7 @@ package view;
 
 import controller.MainController;
 import model.Dinasour;
-import model.Enemy;
+import model.Obstacle;
 import model.Player;
 import processing.core.PApplet;
 
@@ -11,6 +11,7 @@ public class Main extends PApplet{
 	Player p;
 	Dinasour d;
 	MainController controller;
+	Obstacle obx;
 	
 	boolean moveR, moveL;
 	
@@ -27,7 +28,7 @@ public class Main extends PApplet{
 	public void setup() {
 		p = new Player(50, 100, 0, 5, 3, this);
 		d = new Dinasour(100, 800, 20, 1, this, 50);
-		
+		obx = new Obstacle(200, 200, this);
 		controller = new MainController(this);
 	}
 	
@@ -35,8 +36,11 @@ public class Main extends PApplet{
 	public void draw() {
 		
 		//System.out.println(mouseX + "," + mouseY);
-		
+		imageMode(CENTER);
 		background(40);	
+		//controller.drawScreens();
+		obx.drawObstacle();
+		
 		textSize(20);
 		fill(255);
 		text(p.getLives(), 50, 50);
@@ -56,7 +60,6 @@ public class Main extends PApplet{
 			p.setLives(p.getLives()-1);
 		}
 		
-		//controller.drawScreens();
 	}
 	
 	@Override

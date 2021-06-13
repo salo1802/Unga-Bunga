@@ -18,7 +18,7 @@ public class Level1 {
 	
 	public void draw() {
 		
-		app.image(level1, 0, 0, 6251, 920);
+		app.image(level1, 0, 460, 6251, 920);
 	}
 
 }

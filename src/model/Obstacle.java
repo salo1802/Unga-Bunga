@@ -3,7 +3,7 @@ package model;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Obstacles {
+public class Obstacle {
 	
 	private PApplet app;
 	private PImage obstacles; // there will be more than 1 typo of obstacles
@@ -12,15 +12,16 @@ public class Obstacles {
 	
 	private boolean contact, visibility;
 	
-	public Obstacles(int posX, int posY, PApplet app) {
+	public Obstacle(int posX, int posY, PApplet app) {
 		this.posX = posX;
 		this.posY = posY;
 		this.app = app;
 		
 	}
 	
-	public void drawObstacles() {
-		
+	public void drawObstacle() {
+		app.fill(100,100,100);
+		app.rect(posX, posY, 200, 50);
 	}
 	
 	public void interactions() { 
