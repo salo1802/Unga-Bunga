@@ -108,7 +108,7 @@ public class Player implements Comparable<Player>, Runnable{
 			state = DEFAULT;
 		}
 	}
-
+	
 	private void jumpAnimation() {
 		if(rightAnimation ==true) {
 		if(movTimer >=0 && movTimer <20) {

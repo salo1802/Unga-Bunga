@@ -39,7 +39,7 @@ public class GameScreen {
 		
 		switch (levelNumber) {
 		case 1:
-			//level1.draw();
+			level1.draw();
 			break;
 
 		default:

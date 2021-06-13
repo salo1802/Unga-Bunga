@@ -9,9 +9,7 @@ import processing.core.PApplet;
 public class Main extends PApplet{
 
 	
-	Dinasour d;
 	MainController controller;
-	Obstacle obx;
 	
 	public static void main(String[] args) {
 		PApplet.main("view.Main");
@@ -24,8 +22,6 @@ public class Main extends PApplet{
 	
 	@Override
 	public void setup() {
-		d = new Dinasour(100, 800, 20, 1, this, 50);
-		obx = new Obstacle(200, 200, this);
 		controller = new MainController(this);
 	}
 	
@@ -35,16 +31,12 @@ public class Main extends PApplet{
 		imageMode(CENTER);
 		background(40);	
 		//controller.drawScreens();
-		obx.drawObstacle();
-		
+
 		textSize(20);
 		fill(255);
-		
-		d.drawEenemy();
 		//if(p.isFalling()) {
 		
 		//}
-		
 		
 		/*if(dist(p.getPosX(), p.getPosY(), d.getPosX(), d.getPosY()) < 30) {
 			p.setLives(p.getLives()-1);
@@ -60,13 +52,14 @@ public class Main extends PApplet{
 		case 'a': 
 			if(!controller.getGamescreen().getP().getState().equals(controller.getGamescreen().getP().JUMP)) {
 				controller.getGamescreen().getP().setState(controller.getGamescreen().getP().WALK);
-				//controller.getGamescreen().getP().set
+				controller.getGamescreen().getP().setRightAnimation(false);
 			}			
 			controller.getGamescreen().setMoveL(true);
 			break;
 		case 'd':
 			if(!controller.getGamescreen().getP().getState().equals(controller.getGamescreen().getP().JUMP)) {
 				controller.getGamescreen().getP().setState(controller.getGamescreen().getP().WALK);
+				controller.getGamescreen().getP().setRightAnimation(true);
 			}
 			controller.getGamescreen().setMoveR(true);
 			break;
@@ -81,7 +74,7 @@ public class Main extends PApplet{
 			}
 			break;
 		}
-		d.setObjX(controller.getGamescreen().getP().getPosX());
+		//update dinos objective
 	}
 	
 	@Override
