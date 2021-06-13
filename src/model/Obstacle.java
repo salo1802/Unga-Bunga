@@ -23,7 +23,7 @@ public class Obstacle {
 	
 	public void drawObstacle() {
 		app.fill(100,100,100);
-		app.rect(posX, posY, 200, 50);
+		app.rect(posX, posY, lenght, height);
 	}
 	
 	public void interactions() { 

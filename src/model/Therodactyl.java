@@ -5,18 +5,21 @@ import processing.core.PImage;
 
 public class Therodactyl extends Enemy implements EnemyCommonActions{
 	
-	private int dir;
+	private int changeDir;
+	private int changeTime;
+	
 	private int dirX;
-	private int vel;
+	private int speed;
 	
 	private PImage thero;
 
 	public Therodactyl(int posX, int posY, int value, int lives, PApplet app) {
 		super(posX, posY, value, lives, app);
 		
-		dir = (int) app.random(1,2);
+		changeDir = (int) app.random(1,2);
+		changeTime = 60;
 		dirX = (int) app.random(-1,1);
-		vel = 5;
+		speed = 5;
 		
 		thero = app.loadImage("data/pterodctyl.png");
 		
@@ -27,18 +30,27 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 		
 		app.fill(200,50,100);
 		app.ellipse(posX, posY, 100, 50);
+		app.image(thero, posX, posY, 200, 90);
 		
-		//movement();
-
+		movement();
+		
+		if(changeTime > 0) {
+			changeTime --;
+		}
+		
+		if(changeTime == 0) {
+			changeDir = (int) app.random(1,2);
+			changeTime = 60;
+		}
 		
 	}
 
 	@Override
 	public void movement() {
 		
-		posX += dirX * vel;
+		posX += dirX * speed;
 		
-		switch (dir) {
+		switch (changeDir) {
 		case 1:
 			dirX = 1;
 			break;
