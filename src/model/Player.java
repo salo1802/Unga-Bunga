@@ -14,8 +14,10 @@ public class Player implements Comparable<Player>, Runnable{
 	private PApplet app;
 	private PImage playerStand;
 	private PImage[] imagesRunning;
+	private PImage[] imagesRunningL;
 	private PImage[] imagesCliming;
 	private PImage[] imagesjumping;
+	private PImage[] imagesjumpingL;
 	
 	private int posX, posY, score, lives, vel;
 	//
@@ -50,8 +52,10 @@ public class Player implements Comparable<Player>, Runnable{
 		runTimer = 0;
 		climbTimer = 0;
 		imagesjumping = new PImage[6];
+		imagesjumpingL = new PImage[6];
 		imagesCliming = new PImage[2];
 		imagesRunning = new PImage[4];
+		imagesRunningL = new PImage[4];
 		loadImages();
 	}
 	
@@ -68,6 +72,14 @@ public class Player implements Comparable<Player>, Runnable{
 		
 		for (int i = 0; i < imagesRunning.length; i++) {
 			imagesRunning[i] = app.loadImage("data/walk"+(i+1)+".png");
+		}
+		
+		for (int i = 0; i < imagesjumpingL.length; i++) {
+			imagesjumpingL[i] = app.loadImage("data/jumpL"+(i+1)+".png");
+		}
+		
+		for (int i = 0; i < imagesRunningL.length; i++) {
+			imagesRunningL[i] = app.loadImage("data/walk"+(i+1)+"L.png");
 		}
 	}
 
@@ -127,21 +139,19 @@ public class Player implements Comparable<Player>, Runnable{
 		}}
 		
 		if(rightAnimation ==false) {
-			app.push();
 			app.rotateY(180);
 			if(movTimer >=0 && movTimer <20) {
-				app.image(imagesjumping[0], posX, posY);
+				app.image(imagesjumpingL[0], posX, posY);
 			}else if(movTimer >=20 && movTimer < 40) {
-				app.image(imagesjumping[1], posX, posY);
+				app.image(imagesjumpingL[1], posX, posY);
 			}else if(movTimer >=40 && movTimer <55) {
-				app.image(imagesjumping[2], posX, posY);
+				app.image(imagesjumpingL[2], posX, posY);
 			}else if(movTimer >=55 && movTimer <70) {
-				app.image(imagesjumping[3], posX, posY);
+				app.image(imagesjumpingL[3], posX, posY);
 			}else if(movTimer >=70 && movTimer <85) {
-				app.image(imagesjumping[4], posX, posY);
+				app.image(imagesjumpingL[4], posX, posY);
 			}else if(movTimer >=85 && movTimer <100) {
-				app.image(imagesjumping[5], posX, posY);
-			app.pop();}}
+				app.image(imagesjumpingL[5], posX, posY);}}
 		
 		movTimer++;
 		
@@ -154,7 +164,6 @@ public class Player implements Comparable<Player>, Runnable{
 	private void walkAnimation() {
 		if(runTimer >=0 && runTimer < 10) {
 			if(rightAnimation==true) {
-			app.imageMode(PConstants.CENTER);
 			app.image(imagesRunning[0], posX, posY);
 		}else if(runTimer >=10 && runTimer < 20) {
 			app.image(imagesRunning[1], posX, posY);
@@ -162,20 +171,16 @@ public class Player implements Comparable<Player>, Runnable{
 			app.image(imagesRunning[2], posX, posY);
 		}else if(runTimer >=30 && runTimer <40) {
 			app.image(imagesRunning[3], posX, posY);
-		}}
-		
-		if(runTimer >=0 && runTimer < 10) {
-			if(rightAnimation==false) {
-			app.push();
-			app.imageMode(PConstants.CORNERS);
-			app.image(imagesRunning[0], posX+65, posY-62,posX-65, posY+63);
+		}
+		if(rightAnimation==false) {
+			app.image(imagesRunningL[0], posX, posY);
 		}else if(runTimer >=10 && runTimer < 20) {
-			app.image(imagesRunning[1], posX+68, posY-62,posX-67,posY+63);
+			app.image(imagesRunningL[1], posX, posY);
 		}else if(runTimer >=20 && runTimer <30) {
-			app.image(imagesRunning[2], posX+64, posY-66,posX+64,posY+66);
+			app.image(imagesRunningL[2], posX, posY);
 		}else if(runTimer >=30 && runTimer <40) {
-			app.image(imagesRunning[3], posX+58, posY-65,posX-59,posY+65);
-		app.pop();}}
+			app.image(imagesRunningL[3], posX, posY);
+		}}
 		
 		runTimer++;
 		
