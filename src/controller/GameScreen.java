@@ -64,15 +64,15 @@ public class GameScreen {
 		int playerPY = p.getPosY();
 		
 		if(moveL) {					
-			if(playerPX-5 <= opx+length && playerPY < opy+height && playerPY > opy-height) {
+			if(playerPX-5 < opx+length && playerPY < opy+height && playerPY > opy-height && playerPX > opx-length) {
 				
 			}else {
 				p.movement(-5);
 			}			
 		}
 		if(moveR) {
-			if(playerPX+5 >= opx-length && playerPY < opy+height && playerPY > opy-height) {
-				
+			if(playerPX+5 > opx-length && playerPY < opy+height && playerPY > opy-height && playerPX < opx+length) {
+				//p.setPosX(p.getPosX()-1);
 			}else {
 				p.movement(5);
 			}
