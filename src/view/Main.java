@@ -56,7 +56,7 @@ public class Main extends PApplet{
 			p.setLives(p.getLives()-1);
 		}
 		
-		//controller.drawScreens();
+		controller.drawScreens();
 	}
 	
 	@Override
