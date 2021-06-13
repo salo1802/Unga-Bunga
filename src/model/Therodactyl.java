@@ -13,6 +13,7 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 	private int speed;
 	
 	private PImage thero;
+	private PImage theroLeft;
 	
 	private ArrayList<TheroProject> theroProject;
 	private int eggTimer;
@@ -25,6 +26,7 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 		speed = 5;
 		
 		thero = app.loadImage("data/pterodactyl.png");
+		theroLeft = app.loadImage("data/pterodactylL.png");
 		
 		theroProject = new ArrayList<TheroProject>();
 		eggTimer = 60;
@@ -47,7 +49,6 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 			
 			if(theroProject.get(i).getPosY() > 920) {
 				theroProject.remove(i);
-				System.out.println("help");
 			}
 		}
 		}
@@ -62,8 +63,20 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 		}
 		
 		app.fill(200,50,100);
-		app.ellipse(posX, posY, 100, 50);
-		app.image(thero, posX, posY, 200, 90);
+		app.ellipse(posX, posY, 100, 25);
+		
+		switch (dirX) {
+		case 1:
+			app.image(thero, posX, posY, 200, 90);
+			break;
+		case 2:
+			app.image(theroLeft, posX, posY, 200, 90);
+			break;
+
+		default:
+			break;
+		}
+
 		
 		movement();
 		
