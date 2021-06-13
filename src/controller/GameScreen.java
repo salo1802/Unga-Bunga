@@ -4,9 +4,9 @@ import model.Level1;
 import model.Level2;
 import model.Level3;
 import model.Player;
+import model.TheroProject;
 import model.Therodactyl;
 import processing.core.PApplet;
-import processing.core.PImage;
 
 public class GameScreen {
 	
@@ -18,6 +18,7 @@ public class GameScreen {
 	private Level3 level3;
 	private Player p;
 	private Therodactyl thero;
+	private TheroProject tp;
 	
 	boolean moveR, moveL;
 	
@@ -37,7 +38,6 @@ public class GameScreen {
 
 		thero = new Therodactyl(300, 50, 0, 5, app);
 		p = new Player(50, 100, 0, 5, 3, app, this);
-
 		
 	}
 	
@@ -80,8 +80,20 @@ public class GameScreen {
 		
 		thero.drawEenemy();
 		
+		damagePlayer();
+		
 	}
-
+	
+	public void damagePlayer() {
+		
+		//eggs damage
+		
+//		if((int) PApplet.dist(p.getPosX(), p.getPosY(), tp.getPosX(), tp.getPosY()) < 25) {
+//			p.setLives(p.getLives()-1);
+//		}
+		
+	}
+	
 	public Player getP() {
 		return p;
 	}

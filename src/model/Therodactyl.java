@@ -1,32 +1,57 @@
 package model;
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Therodactyl extends Enemy implements EnemyCommonActions{
 	
-	private int changeDir;
 	private int changeTime;
 	
 	private int dirX;
 	private int speed;
 	
 	private PImage thero;
+	
+	private ArrayList<TheroProject> theroProject;
+	private int eggTimer;
 
 	public Therodactyl(int posX, int posY, int value, int lives, PApplet app) {
 		super(posX, posY, value, lives, app);
 		
-		changeDir = (int) app.random(1,2);
 		changeTime = 60;
-		dirX = (int) app.random(-1,1);
+		dirX = (int) app.random(1, 2);
 		speed = 5;
 		
 		thero = app.loadImage("data/pterodactyl.png");
 		
+		theroProject = new ArrayList<TheroProject>();
+		eggTimer = 60;
+		
 	}
+	
+	public void actions() { // add eggs
+		
+		eggTimer --;
+		if(eggTimer <= 0) {
+			
+			TheroProject newTP = new TheroProject(posX, posY, app);
+			
+			theroProject.add(newTP);
+			
+			eggTimer = 60;
+			}
+		}
 
 	@Override
 	public void drawEenemy() {
+		
+		actions();
+		
+		for (int i = 0; i < theroProject.size(); i++) {
+			theroProject.get(i).draw();
+		}
 		
 		app.fill(200,50,100);
 		app.ellipse(posX, posY, 100, 50);
@@ -34,33 +59,31 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 		
 		movement();
 		
-		if(changeTime > 0) {
-			changeTime --;
+		changeTime ++;
+		if(changeTime == 60) {
+			dirX = 1;
+		}else if(changeTime == 120) {
+			dirX = 2;
+			changeTime = 0;
 		}
-		
-		if(changeTime == 0) {
-			changeDir = (int) app.random(1,2);
-			changeTime = 60;
-		}
-		
 	}
 
 	@Override
 	public void movement() {
 		
-		posX += dirX * speed;
-		
-		switch (changeDir) {
+
+		switch (dirX) {
 		case 1:
-			dirX = 1;
+			posX += speed;
 			break;
 		case 2:
-			dirX = -1;
+			posX -= speed;
 			break;
 
 		default:
 			break;
 		}
+		
 	}
 
 }
