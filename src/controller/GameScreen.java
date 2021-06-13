@@ -56,11 +56,26 @@ public class GameScreen {
 		p.drawPlayer();
 		new Thread(p).start();
 		
-		if(moveL) {
-			p.movement(-5);
+		int opx = level1.getObX().getPosX();
+		int length = level1.getObX().getLenght()/2;
+		int opy = level1.getObX().getPosY();
+		int height = level1.getObX().getHeight()/2;
+		int playerPX = p.getPosX();
+		int playerPY = p.getPosY();
+		
+		if(moveL) {					
+			if(playerPX-5 <= opx+length && playerPY < opy+height && playerPY > opy-height) {
+				
+			}else {
+				p.movement(-5);
+			}			
 		}
 		if(moveR) {
-			p.movement(5);
+			if(playerPX+5 >= opx-length && playerPY < opy+height && playerPY > opy-height) {
+				
+			}else {
+				p.movement(5);
+			}
 		}
 		
 		thero.drawEenemy();

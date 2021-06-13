@@ -31,6 +31,9 @@ public class Player implements Comparable<Player>, Runnable{
 	private boolean gameOver;
 	private boolean rightAnimation;
 	private boolean canMove;
+	private int normalForce;
+	private boolean test;
+	private boolean can;
 	
 	private GameScreen gameScreen;	
 	
@@ -49,6 +52,7 @@ public class Player implements Comparable<Player>, Runnable{
 		
 		gameOver = false;
 		fallTime = 0;
+		canMove = true;
 		
 		jumpJump = false;
 		rightAnimation = true;
@@ -109,7 +113,13 @@ public class Player implements Comparable<Player>, Runnable{
 			break;
 		}
 		
-		verifyColl();
+		//verifyColl();
+		verifyFall();
+		can = verifyJump();
+		if(!can) {
+			jumpFactor = 0;
+			state = DEFAULT;
+		}
 		
 		if(invulnerableTime > 0) {
 			invulnerableTime --;
@@ -119,21 +129,61 @@ public class Player implements Comparable<Player>, Runnable{
 		app.circle(posX, posY, 50);
 	}
 	
-	private void verifyColl() {
+	private void verifyFall() {
+		int objPx = gameScreen.getLevel1().getObX().getPosX();
+		int length = gameScreen.getLevel1().getObX().getLenght()/2;
+		int objPy = gameScreen.getLevel1().getObX().getPosY();
+		int height = gameScreen.getLevel1().getObX().getHeight()/2;
+		if(posY+gravity >= objPy-height && posX > objPx-length && posX < objPx+length && posY < objPy) {
+			gravity = 0;
+			jumpFactor = 0;
+			test = true;
+		}else
+			if(test) {
+				gravity = 3;
+				test = false;
+			}
+	}
+
+	/*public void verifyColl() {
 		int objPx = gameScreen.getLevel1().getObX().getPosX();
 		int length = gameScreen.getLevel1().getObX().getLenght();
 		int objPy = gameScreen.getLevel1().getObX().getPosY();
 		int width = gameScreen.getLevel1().getObX().getHeight();
-			if(posX < objPx+length && posX > objPx-length && posY < objPy+width && posY > objPy-width) {
-				if(posY > objPy) {
-					
-					posY-=(width+50);
-				}
-				canMove = false;
+			if(posX < objPx+(length/2) && posX > objPx-(length/2) && posY < objPy+(width/2) && posY > objPy-(width/2)) {
+				
+					gravity = 0;
+					jumpFactor = 0;				
+					test = true;
 			}else {
+				if(test) {
+					gravity = 3;
+					test = false;
+				}
 				canMove = true;
 				
 			}		
+			
+			
+	}*/
+	
+	public void verifyColl() {
+		int objPx = gameScreen.getLevel1().getObX().getPosX();
+		int length = gameScreen.getLevel1().getObX().getLenght()/2;
+		int objPy = gameScreen.getLevel1().getObX().getPosY();
+		int height = gameScreen.getLevel1().getObX().getHeight()/2;
+		
+		if(posY >= objPy-height && posY <= objPy+height && posX > objPx-length && posX < objPx+length) {
+			test = true;
+			gravity = 0;
+			jumpFactor = 0;
+			posY = objPy-height;
+		}else {
+			if(test) {
+				gravity = 3;
+				test = false;
+			}
+		}
 	}
 
 	private void climbAnimation() {
@@ -230,11 +280,25 @@ public class Player implements Comparable<Player>, Runnable{
 			jumpFactor = -10;
 			gravity = 3;
 			fallTime = 0;
+			//normalForce = 3;
 		}else {
 			jumpFactor=0;
 		}
 	}
 	
+	private boolean verifyJump() {
+		boolean canJump = true;
+		int opx = gameScreen.getLevel1().getObX().getPosX();
+		int length = gameScreen.getLevel1().getObX().getLenght()/2;
+		int opy = gameScreen.getLevel1().getObX().getPosY();
+		int height = gameScreen.getLevel1().getObX().getHeight()/2;
+		
+		if(posY-jumpFactor <= opy+height && posX >= opx-length && posX <= opx+length && posY > opy-height) {
+			canJump = false;
+		}
+		return canJump;
+	}
+
 	public void manageGravity() {
 		if(posY < 800) {
 			fallTime++;
@@ -242,11 +306,12 @@ public class Player implements Comparable<Player>, Runnable{
 				gravity+=gravity/2;
 				fallTime= 0;
 			}
-			posY+=gravity+jumpFactor;
+			posY+=gravity+jumpFactor+normalForce;
 		}else {
 			posY=799;
 			gravity = 0;
 			jumpFactor = 0;
+			//normalForce = 0;
 		}
 	}
 	
