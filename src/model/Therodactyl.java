@@ -21,7 +21,7 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 		dirX = (int) app.random(-1,1);
 		speed = 5;
 		
-		thero = app.loadImage("data/pterodctyl.png");
+		thero = app.loadImage("data/pterodactyl.png");
 		
 	}
 
@@ -61,8 +61,6 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 		default:
 			break;
 		}
-
-		
 	}
 
 }

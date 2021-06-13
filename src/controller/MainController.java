@@ -16,15 +16,10 @@ public class MainController {
 	//change screens
 	private int screen;
 	
-	//text 
-	private int textTimer;
-	
 	public MainController(PApplet app) {
 		this.app = app;
 		
 		screen = 0;
-		
-		textTimer = 30;
 		
 		menuscreen = new MenuScreen(app);
 		introscreen = new IntroScreen(app);
@@ -41,16 +36,6 @@ public class MainController {
 			break;
 		case 1:
 			introscreen.draw();
-			
-			//text 
-//			textTimer --;
-//			if(textTimer <= 0) {
-//				app.textSize(30);
-//				app.fill(0);
-//				app.text("Press anywhere to begin", 30, 30);
-//				textTimer = 30;
-//			}
-			
 			break;
 		case 2:
 			gamescreen.drawLevel();
