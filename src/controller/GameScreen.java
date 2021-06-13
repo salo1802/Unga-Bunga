@@ -31,7 +31,7 @@ public class GameScreen {
 		level1 = new Level1(app);
 		level2 = new Level2(app);
 		level3 = new Level3(app);
-		p = new Player(50, 100, 0, 5, 3, app);
+		p = new Player(50, 100, 0, 5, 3, app, this);
 		
 	}
 	
@@ -81,6 +81,14 @@ public class GameScreen {
 
 	public void setMoveL(boolean moveL) {
 		this.moveL = moveL;
+	}
+
+	public Level1 getLevel1() {
+		return level1;
+	}
+
+	public void setLevel1(Level1 level1) {
+		this.level1 = level1;
 	}
 
 	

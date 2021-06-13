@@ -1,5 +1,6 @@
 package model;
 
+import controller.GameScreen;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
@@ -18,7 +19,6 @@ public class Player implements Comparable<Player>, Runnable{
 	private PImage[] imagesjumping;
 	
 	private int posX, posY, score, lives, vel;
-	//
 	private int gravity, jumpFactor;
 	private int fallTime;
 	private int invulnerableTime;
@@ -28,15 +28,18 @@ public class Player implements Comparable<Player>, Runnable{
 	private boolean jumpJump;
 	private boolean gameOver;
 	private boolean rightAnimation;
+	private boolean canMove;
 	
+	private GameScreen gameScreen;	
 	
-	public Player(int posX, int posY, int score, int lives, int vel, PApplet app) {
+	public Player(int posX, int posY, int score, int lives, int vel, PApplet app, GameScreen gs) {
 		this.app = app;
 		this.posX = posX;
 		this.posY = posY;
 		this.score = score;
 		this.lives = lives;
 		this.vel = vel;
+		gameScreen = gs;
 		gravity = 3;
 		state = DEFAULT;
 		
@@ -88,14 +91,33 @@ public class Player implements Comparable<Player>, Runnable{
 			break;
 		}
 		
+		verifyColl();
+		
 		if(invulnerableTime > 0) {
 			invulnerableTime --;
 		}
 		
-		//app.fill(220);
-		//app.circle(posX, posY, 50);
+		app.fill(220);
+		app.circle(posX, posY, 50);
 	}
 	
+	private void verifyColl() {
+		int objPx = gameScreen.getLevel1().getObX().getPosX();
+		int length = gameScreen.getLevel1().getObX().getLenght();
+		int objPy = gameScreen.getLevel1().getObX().getPosY();
+		int width = gameScreen.getLevel1().getObX().getHeight();
+			if(posX < objPx+length && posX > objPx-length && posY < objPy+width && posY > objPy-width) {
+				if(posY > objPy) {
+					gravity = 0;
+					jumpFactor = 0;
+					posY-=(width+50);
+				}
+				canMove = false;
+			}else {
+				canMove = true;
+			}		
+	}
+
 	private void climbAnimation() {
 		if(climbTimer >=0 && climbTimer <20) {
 			app.image(imagesCliming[0], posX, posY);
@@ -186,14 +208,19 @@ public class Player implements Comparable<Player>, Runnable{
 	}
 
 	public void movement(int vel) {
-		posX+=vel;
-
+		if(canMove) {
+			posX+=vel;
+		}
 	}
 	
 	public void jump() {
-		jumpFactor = -10;
-		gravity = 3;
-		fallTime = 0;
+		if(canMove) {
+			jumpFactor = -10;
+			gravity = 3;
+			fallTime = 0;
+		}else {
+			jumpFactor=0;
+		}
 	}
 	
 	public void manageGravity() {

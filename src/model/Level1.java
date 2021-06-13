@@ -14,15 +14,24 @@ public class Level1 {
 		this.app = app;
 		
 		level1 = app.loadImage("data/nivel1.png");
-		obX = new Obstacle(500, 500, app);
+		obX = new Obstacle(500, 600, app);
 		
 	}
 	
 	public void draw() {
-		app.fill(200);
-		app.rect(1620, 920, 3240, 1840);
-
+		//app.fill(200);
+		//app.rect(0, 0, 3240, 1840);
+		obX.drawObstacle();
 		//app.image(level1, 0, 460, 6251, 920);
 	}
 
+	public Obstacle getObX() {
+		return obX;
+	}
+
+	public void setObX(Obstacle obX) {
+		this.obX = obX;
+	}
+
+	
 }

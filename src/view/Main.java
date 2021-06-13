@@ -29,6 +29,7 @@ public class Main extends PApplet{
 	public void draw() {
 		//System.out.println(mouseX + "," + mouseY);
 		imageMode(CENTER);
+		rectMode(CENTER);
 		background(40);	
 		//controller.drawScreens();
 
@@ -106,6 +107,6 @@ public class Main extends PApplet{
 		
 	}
 
-	}
+}
 
 
