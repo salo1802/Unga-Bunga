@@ -8,12 +8,8 @@ import processing.core.PApplet;
 
 public class Main extends PApplet{
 
-	Player p;
-	Dinasour d;
-	MainController controller;
-	Obstacle obx;
 	
-	boolean moveR, moveL;
+	MainController controller;
 	
 	public static void main(String[] args) {
 		PApplet.main("view.Main");
@@ -26,42 +22,28 @@ public class Main extends PApplet{
 	
 	@Override
 	public void setup() {
-		p = new Player(50, 100, 0, 5, 3, this);
-		d = new Dinasour(100, 800, 20, 1, this, 50);
-		obx = new Obstacle(200, 200, this);
 		controller = new MainController(this);
 	}
 	
 	@Override
 	public void draw() {
-		
 		//System.out.println(mouseX + "," + mouseY);
 		imageMode(CENTER);
 		background(40);	
 		//controller.drawScreens();
-		obx.drawObstacle();
-		
+
 		textSize(20);
 		fill(255);
-		text(p.getLives(), 50, 50);
-		p.drawPlayer();
-		d.drawEenemy();
 		//if(p.isFalling()) {
-		new Thread(p).start();
+		
 		//}
-		if(moveL) {
-			p.movement(-5);
-		}
-		if(moveR) {
-			p.movement(5);
-		}
 		
-		if(dist(p.getPosX(), p.getPosY(), d.getPosX(), d.getPosY()) < 30) {
+		/*if(dist(p.getPosX(), p.getPosY(), d.getPosX(), d.getPosY()) < 30) {
 			p.setLives(p.getLives()-1);
-		}
-		
-
+		}*/
 		controller.drawScreens();
+
+		//controller.drawScreens();
 
 	}
 	
@@ -70,39 +52,41 @@ public class Main extends PApplet{
 		
 		switch(key) {
 		case 'a': 
-			if(!p.getState().equals(p.JUMP)) {
-				p.setState(p.WALK);
+			if(!controller.getGamescreen().getP().getState().equals(controller.getGamescreen().getP().JUMP)) {
+				controller.getGamescreen().getP().setState(controller.getGamescreen().getP().WALK);
+				controller.getGamescreen().getP().setRightAnimation(false);
 			}			
-			moveL = true;
+			controller.getGamescreen().setMoveL(true);
 			break;
 		case 'd':
-			if(!p.getState().equals(p.JUMP)) {
-				p.setState(p.WALK);
+			if(!controller.getGamescreen().getP().getState().equals(controller.getGamescreen().getP().JUMP)) {
+				controller.getGamescreen().getP().setState(controller.getGamescreen().getP().WALK);
+				controller.getGamescreen().getP().setRightAnimation(true);
 			}
-			moveR = true;
+			controller.getGamescreen().setMoveR(true);
 			break;
 		case 'w':
-				p.setState(p.CLIMB);
+			controller.getGamescreen().getP().setState(controller.getGamescreen().getP().CLIMB);
 			break;
 		case 32:
-			if(!p.getState().equals(p.CLIMB)) {
-				p.setMovTimer(0);
-				p.setState(p.JUMP);
-				p.jump();
+			if(!controller.getGamescreen().getP().getState().equals(controller.getGamescreen().getP().CLIMB)) {
+				controller.getGamescreen().getP().setMovTimer(0);
+				controller.getGamescreen().getP().setState(controller.getGamescreen().getP().JUMP);
+				controller.getGamescreen().getP().jump();
 			}
 			break;
 		}
-		d.setObjX(p.getPosX());
+		//update dinos objective
 	}
 	
 	@Override
 	public void keyReleased() {
 		switch(key) {
 		case 'a': 
-			moveL = false;
+			controller.getGamescreen().setMoveL(false);
 			break;
 		case 'd':
-			moveR = false;
+			controller.getGamescreen().setMoveR(false);
 			break;
 		}
 	}
