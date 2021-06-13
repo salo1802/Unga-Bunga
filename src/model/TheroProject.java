@@ -17,13 +17,15 @@ public class TheroProject extends Projectile{
 	@Override
 	public void draw() {
 
+		app.image(theroProjectile, posX, posY);
 		
+		movement();
 	}
 
 	@Override
 	public void movement() {
 
-		
+		posY += 5;
 	}
 
 }

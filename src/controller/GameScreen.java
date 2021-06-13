@@ -4,6 +4,7 @@ import model.Level1;
 import model.Level2;
 import model.Level3;
 import model.Player;
+import model.Therodactyl;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -16,6 +17,8 @@ public class GameScreen {
 	private Level2 level2;
 	private Level3 level3;
 	private Player p;
+	private Therodactyl thero;
+	
 	boolean moveR, moveL;
 	
 	private int levelNumber;
@@ -31,7 +34,9 @@ public class GameScreen {
 		level1 = new Level1(app);
 		level2 = new Level2(app);
 		level3 = new Level3(app);
+		
 		p = new Player(50, 100, 0, 5, 3, app);
+		thero = new Therodactyl(300, 50, 0, 5, app);
 		
 	}
 	
@@ -56,6 +61,8 @@ public class GameScreen {
 		if(moveR) {
 			p.movement(5);
 		}
+		
+		thero.drawEenemy();
 		
 	}
 
