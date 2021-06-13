@@ -16,8 +16,8 @@ public class Obstacle {
 		this.posX = posX;
 		this.posY = posY;
 		this.app = app;
-		lenght = 200;
-		height = 50;
+		lenght = 400;
+		height = 200;
 		
 	}
 	
