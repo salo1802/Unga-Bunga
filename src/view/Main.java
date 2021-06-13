@@ -75,10 +75,15 @@ public class Main extends PApplet{
 			}
 			moveR = true;
 			break;
+		case 'w':
+				p.setState(p.CLIMB);
+			break;
 		case 32:
-			p.setMovTimer(0);
-			p.setState(p.JUMP);
-			p.jump();
+			if(!p.getState().equals(p.CLIMB)) {
+				p.setMovTimer(0);
+				p.setState(p.JUMP);
+				p.jump();
+			}
 			break;
 		}
 		d.setObjX(p.getPosX());

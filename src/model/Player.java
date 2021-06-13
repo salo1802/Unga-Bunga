@@ -22,7 +22,7 @@ public class Player implements Comparable<Player>, Runnable{
 	private int fallTime;
 	private int invulnerableTime;
 	private String state;
-	private int movTimer, runTimer;
+	private int movTimer, runTimer, climbTimer;
 	
 	private boolean jumpJump;
 	
@@ -45,6 +45,7 @@ public class Player implements Comparable<Player>, Runnable{
 		
 		movTimer = 0;
 		runTimer = 0;
+		climbTimer = 0;
 		imagesjumping = new PImage[6];
 		imagesCliming = new PImage[2];
 		imagesRunning = new PImage[4];
@@ -88,12 +89,20 @@ public class Player implements Comparable<Player>, Runnable{
 		if(invulnerableTime > 0) {
 			invulnerableTime --;
 		}
-		System.out.println(movTimer);
 	}
 	
 	private void climbAnimation() {
-		// TODO Auto-generated method stub
+		if(climbTimer >=0 && climbTimer <20) {
+			app.image(imagesCliming[0], posX, posY);
+		}else if(climbTimer >=20 && climbTimer < 40) {
+			app.image(imagesCliming[1], posX, posY);
+		}
+		climbTimer++;
 		
+		if(climbTimer == 40) {
+			climbTimer = 0;
+			state = DEFAULT;
+		}
 	}
 
 	private void jumpAnimation() {
