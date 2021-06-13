@@ -26,6 +26,8 @@ public class Player implements Comparable<Player>, Runnable{
 	
 	private boolean jumpJump;
 	private boolean gameOver;
+	private boolean rightAnimation;
+	
 	
 	public Player(int posX, int posY, int score, int lives, int vel, PApplet app) {
 		this.app = app;
@@ -41,6 +43,7 @@ public class Player implements Comparable<Player>, Runnable{
 		fallTime = 0;
 		
 		jumpJump = false;
+		rightAnimation = true;
 		
 		movTimer = 0;
 		runTimer = 0;
@@ -107,6 +110,7 @@ public class Player implements Comparable<Player>, Runnable{
 	}
 
 	private void jumpAnimation() {
+		if(rightAnimation ==true) {
 		if(movTimer >=0 && movTimer <20) {
 			app.image(imagesjumping[0], posX, posY);
 		}else if(movTimer >=20 && movTimer < 40) {
@@ -119,7 +123,25 @@ public class Player implements Comparable<Player>, Runnable{
 			app.image(imagesjumping[4], posX, posY);
 		}else if(movTimer >=85 && movTimer <100) {
 			app.image(imagesjumping[5], posX, posY);
-		}
+		}}
+		
+		if(rightAnimation ==false) {
+			app.push();
+			app.rotateY(180);
+			if(movTimer >=0 && movTimer <20) {
+				app.image(imagesjumping[0], posX, posY);
+			}else if(movTimer >=20 && movTimer < 40) {
+				app.image(imagesjumping[1], posX, posY);
+			}else if(movTimer >=40 && movTimer <55) {
+				app.image(imagesjumping[2], posX, posY);
+			}else if(movTimer >=55 && movTimer <70) {
+				app.image(imagesjumping[3], posX, posY);
+			}else if(movTimer >=70 && movTimer <85) {
+				app.image(imagesjumping[4], posX, posY);
+			}else if(movTimer >=85 && movTimer <100) {
+				app.image(imagesjumping[5], posX, posY);
+			app.pop();}}
+		
 		movTimer++;
 		
 		if(movTimer>100) {
@@ -130,6 +152,7 @@ public class Player implements Comparable<Player>, Runnable{
 
 	private void walkAnimation() {
 		if(runTimer >=0 && runTimer < 10) {
+			if(rightAnimation==true) {
 			app.image(imagesRunning[0], posX, posY);
 		}else if(runTimer >=10 && runTimer < 20) {
 			app.image(imagesRunning[1], posX, posY);
@@ -137,7 +160,21 @@ public class Player implements Comparable<Player>, Runnable{
 			app.image(imagesRunning[2], posX, posY);
 		}else if(runTimer >=30 && runTimer <40) {
 			app.image(imagesRunning[3], posX, posY);
-		}
+		}}
+		
+		if(runTimer >=0 && runTimer < 10) {
+			if(rightAnimation==false) {
+			app.push();
+			app.rotateY(180);
+			app.image(imagesRunning[0], posX, posY);
+		}else if(runTimer >=10 && runTimer < 20) {
+			app.image(imagesRunning[1], posX, posY);
+		}else if(runTimer >=20 && runTimer <30) {
+			app.image(imagesRunning[2], posX, posY);
+		}else if(runTimer >=30 && runTimer <40) {
+			app.image(imagesRunning[3], posX, posY);
+		app.pop();}}
+		
 		runTimer++;
 		
 		if(runTimer == 40) {
