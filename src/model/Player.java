@@ -18,6 +18,7 @@ public class Player implements Comparable<Player>, Runnable{
 	private PImage[] imagesCliming;
 	private PImage[] imagesjumping;
 	private PImage[] imagesjumpingL;
+	private PImage playerStandL;
 	
 	private int posX, posY, score, lives, vel;
 	//
@@ -30,6 +31,7 @@ public class Player implements Comparable<Player>, Runnable{
 	private boolean jumpJump;
 	private boolean gameOver;
 	private boolean rightAnimation;
+	
 	
 	
 	public Player(int posX, int posY, int score, int lives, int vel, PApplet app) {
@@ -61,6 +63,7 @@ public class Player implements Comparable<Player>, Runnable{
 	
 	private void loadImages() {
 		playerStand = app.loadImage("data/stand.png");
+		playerStandL = app.loadImage("data/walkStillL.png");
 		
 		for (int i = 0; i < imagesCliming.length; i++) {
 			imagesCliming[i] = app.loadImage("data/climb"+(i+1)+".png");
@@ -96,7 +99,10 @@ public class Player implements Comparable<Player>, Runnable{
 			climbAnimation();
 			break;
 		default:
-			app.image(playerStand, posX, posY);
+			if(rightAnimation==true) {
+			app.image(playerStand, posX, posY);}
+			if(rightAnimation==false) {
+				app.image(playerStandL, posX, posY);}
 			break;
 		}
 		
@@ -139,7 +145,6 @@ public class Player implements Comparable<Player>, Runnable{
 		}}
 		
 		if(rightAnimation ==false) {
-			app.rotateY(180);
 			if(movTimer >=0 && movTimer <20) {
 				app.image(imagesjumpingL[0], posX, posY);
 			}else if(movTimer >=20 && movTimer < 40) {
@@ -162,8 +167,9 @@ public class Player implements Comparable<Player>, Runnable{
 	}
 
 	private void walkAnimation() {
-		if(runTimer >=0 && runTimer < 10) {
+		
 			if(rightAnimation==true) {
+				if(runTimer >=0 && runTimer < 10) {
 			app.image(imagesRunning[0], posX, posY);
 		}else if(runTimer >=10 && runTimer < 20) {
 			app.image(imagesRunning[1], posX, posY);
@@ -171,8 +177,9 @@ public class Player implements Comparable<Player>, Runnable{
 			app.image(imagesRunning[2], posX, posY);
 		}else if(runTimer >=30 && runTimer <40) {
 			app.image(imagesRunning[3], posX, posY);
-		}
+		}}
 		if(rightAnimation==false) {
+			if(runTimer >=0 && runTimer < 10) {
 			app.image(imagesRunningL[0], posX, posY);
 		}else if(runTimer >=10 && runTimer < 20) {
 			app.image(imagesRunningL[1], posX, posY);
