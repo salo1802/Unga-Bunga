@@ -36,6 +36,8 @@ public class MainController {
 		scorescreen = new ScoreScreen(app, logic);
 		
 		namescreen.deleteTextField();
+		
+		
 	}
 	
 	public void drawScreens() {
@@ -177,4 +179,5 @@ public class MainController {
 	public void setNamescreen(EnterNameScreen namescreen) {
 		this.namescreen = namescreen;
 	}
+	
 }
