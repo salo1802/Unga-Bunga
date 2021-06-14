@@ -49,7 +49,7 @@ public class Player implements Comparable<Player>, Runnable{
 		this.score = score;
 		this.lives = lives;
 		this.vel = vel;
-		this.gameDate = gameDate;
+		this.gameDate = java.time.LocalDateTime.now().toString();
 		this.playTime = playTime;
 		this.username = username;
 		gameScreen = gs;
