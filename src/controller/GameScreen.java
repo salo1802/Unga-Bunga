@@ -40,6 +40,7 @@ public class GameScreen {
 		levelNumber = 1; //1 = level 1, 2 = level 2, 3 = level 3
 		startTime = System.currentTimeMillis();
 		
+		highscores = new ArrayList<>();
 		
 		p = new Player(50, 100, 0, 5, 3, app, this, 0, "user");
 		level1 = new Levels(app, p);
