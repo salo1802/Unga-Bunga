@@ -43,9 +43,9 @@ public class EnterNameScreen {
 		
 		
 		cp5.addTextfield("txtUser")
-	     .setPosition(500,322)
-	     .setColorBackground(app.color(190,250,205))
-	     .setSize(310,50)
+	     .setPosition(782,280)
+	     .setColorBackground(0)
+	     .setSize(340,35)
 	     .setFocus(true)
 	     .setColor(app.color(14,88,62))
 	     .setColorActive(app.color(182,250,78))
@@ -54,7 +54,13 @@ public class EnterNameScreen {
 	     ;
 	}
 	
-	
+	public void drawScreem() {
+		app.textSize(30);
+		app.fill(200);
+		app.text(username, 300, 300);
+	}
+
+
 	public void deleteTextField() {
 		cp5.get(Textfield.class, "txtUser").hide();
 	}

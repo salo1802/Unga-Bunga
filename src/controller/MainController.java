@@ -137,6 +137,7 @@ public class MainController {
 			if(added) {
 				screen = 4;
 				logic.getPlayers().add(gamescreen.getP());
+				namescreen.deleteTextField();
 			}
 			
 		}
@@ -158,5 +159,19 @@ public class MainController {
 		this.gamescreen = gamescreen;
 	}
 
-	
+	public int getScreen() {
+		return screen;
+	}
+
+	public void setScreen(int screen) {
+		this.screen = screen;
+	}
+
+	public EnterNameScreen getNamescreen() {
+		return namescreen;
+	}
+
+	public void setNamescreen(EnterNameScreen namescreen) {
+		this.namescreen = namescreen;
+	}
 }
