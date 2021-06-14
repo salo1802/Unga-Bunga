@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.IOException;
+
 import processing.core.PApplet;
 
 public class MainController {
@@ -52,6 +54,21 @@ public class MainController {
 			break;
 		case 3:
 			namescreen.draw();
+			
+			
+			// en la clase namescreen existe una variable con el username del usuario
+			// luego de dibujar el namescreen, se guardará el nombre del usuario en el objeto player
+			
+			// ***posible punto de fallo***  (debe asegurarse primero que el usuario ingrese 
+			// el username antes de asignarlo en la siguiente linea)
+			gamescreen.getP().setUsername(namescreen.getUsername());
+			gamescreen.addPlayerToHighscore();
+			try {
+				gamescreen.saveHighscoreTxt();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		case 4:
 			scorescreen.draw();
