@@ -9,13 +9,13 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 	
 	private int changeTime;
 	
-	private int dirX;
+	private int dirX, flyTime, dieTime;
 	private int speed;
-	private boolean death;
 	
-	private PImage[] thero;
-	private PImage[] theroLeft;
-	private PImage[] theroDeath;
+	private PImage[] flyR;
+	private PImage[] flyL;
+	private PImage[] theroDeathR;
+	private PImage[] theroDeathL;
 	
 	private ArrayList<TheroProject> theroProject;
 	private int eggTimer;
@@ -27,50 +27,51 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 		dirX = (int) app.random(1, 2);
 		speed = 5;
 		
-		thero = new PImage[1];
-		theroLeft = new PImage[1];
-		theroDeath = new PImage[2];
-		
-		//thero = app.loadImage("data/pterodactyl.png");
-		//theroLeft = app.loadImage("data/pterodactylL.png");
+		flyR = new PImage[2];
+		theroDeathR = new PImage[3];
+		flyL = new PImage[2];
+		theroDeathL = new PImage[3];
 		
 		theroProject = new ArrayList<TheroProject>();
 		eggTimer = 60;
-		
-		this.lives = 2;
-		this.death = false;
+		loadImages();
 	}
 	
-	public void actions() {
-		
-		if(death = false) { // add and stop adding eggs
-		eggTimer --;
-		if(eggTimer <= 0) {
-			
-			TheroProject newTP = new TheroProject(posX, posY, app);
-			
-			theroProject.add(newTP);
-			
-			eggTimer = 60;
-			}
-		
-		for (int i = 0; i < theroProject.size(); i++) { //delete egg if go beyond Y
-			
-			if(theroProject.get(i).getPosY() > 920) {
-				theroProject.remove(i);
-			}
+	private void loadImages() {
+		for (int i = 0; i < flyL.length; i++) {
+			flyR[i] = app.loadImage("data/i-pterodactylFly"+(i+1)+".png");
 		}
+		for (int i = 0; i < flyR.length; i++) {
+			flyL[i] = app.loadImage("data/d-pterodactylFly"+(i+1)+".png");
 		}
-		
-		//Dearth of therodactyl
-		if(lives == 0) {
-			death = true;
+		for (int i = 0; i < theroDeathL.length; i++) {
+			theroDeathL[i] = app.loadImage("data/i-pterodactylDie"+(i+1)+".png");
 		}
-		
-		if(death) {
-			dirX = 3;
+		for (int i = 0; i < theroDeathR.length; i++) {
+			theroDeathR[i] = app.loadImage("data/d-pterodactylDie"+(i+1)+".png");
 		}
 	}
+
+	public void actions() { // add eggs
+		if(lives > 0) {
+			eggTimer --;
+			if(eggTimer <= 0) {
+				
+				TheroProject newTP = new TheroProject(posX, posY, app);
+				
+				theroProject.add(newTP);
+				
+				eggTimer = 60;
+				}
+			
+			for (int i = 0; i < theroProject.size(); i++) {
+				
+				if(theroProject.get(i).getPosY() > 920) {
+					theroProject.remove(i);
+				}
+			}
+		}
+		}
 
 	@Override
 	public void drawEenemy() {
@@ -81,20 +82,28 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 			theroProject.get(i).draw();
 		}
 		
-		app.fill(200,50,100);
-		app.ellipse(posX, posY, 100, 25);
+		//app.fill(200,50,100);
+		//app.ellipse(posX, posY, 100, 25);
+		
+		if(lives == 0 && dirX == 1) {
+			dirX = 3;
+		}else if(lives == 0 && dirX == 2) {
+			dirX = 4;
+		}
 		
 		switch (dirX) {
-		case 1: // RIGHT
-			//app.image(thero, posX, posY, 200, 90);
+		case 1:
+			animFlyL();
 			break;
-		case 2: // LEFT
-			//app.image(theroLeft, posX, posY, 200, 90);
+		case 2:
+			animFlyR();
 			break;
-		case 3: // DEATH
-			//app.image(thero, posX, posY, 200, 90);
+		case 3:
+			animDieL();
 			break;
-
+		case 4:
+			animDieR();
+			break;
 		default:
 			break;
 		}
@@ -111,21 +120,72 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 		}
 	}
 
+	private void animDieR() {
+		dieTime++;
+		if(dieTime >= 0 && dieTime < 25) {
+			app.image(theroDeathR[0], posX, posY);
+		}else if(dieTime >= 25 && dieTime < 50) {
+			app.image(theroDeathR[1], posX, posY);
+		}else{
+			app.image(theroDeathR[2], posX, posY);
+		}
+		
+	}
+
+	private void animDieL() {
+		dieTime++;
+		if(dieTime >= 0 && dieTime < 25) {
+			app.image(theroDeathR[0], posX, posY);
+		}else if(dieTime >= 25 && dieTime < 50) {
+			app.image(theroDeathR[1], posX, posY);
+		}else{
+			app.image(theroDeathR[2], posX, posY);
+		}
+	}
+
+	private void animFlyL() {
+		flyTime++;
+		if(flyTime >= 0 && flyTime < 12) {
+			app.image(flyL[0], posX, posY);
+		}else if(flyTime >= 12 && flyTime <= 24) {
+			app.image(flyL[1], posX, posY);
+		}
+		
+		if(flyTime == 24) {
+			flyTime = 0;
+		}
+	}
+
+	private void animFlyR() {
+		flyTime++;
+		if(flyTime >= 0 && flyTime < 12) {
+			app.image(flyR[0], posX, posY);
+		}else if(flyTime >= 12 && flyTime <= 24) {
+			app.image(flyR[1], posX, posY);
+		}
+		
+		if(flyTime == 24) {
+			flyTime = 0;
+		}
+	}
+
 	@Override
 	public void movement() {
 		
-
+		
 		switch (dirX) {
-		case 1: // RIGHT
+		case 1:
 			posX += speed;
 			break;
-		case 2: // LEFT
+		case 2:
 			posX -= speed;
 			break;
-		case 3: // DEATH
-			posY += speed;
+		case 3:
+		case 4:
+			if(posY <800) {
+				posY+=3*speed;
+			}			
 			break;
-
 		default:
 			break;
 		}

@@ -6,19 +6,24 @@ import processing.core.PImage;
 public class PiraProject extends Projectile {
 	
 	private PImage piraProjectile;
+	private PImage piraProjectileL;
 	private boolean direction;
 
 	public PiraProject(int posX, int posY, PApplet app) {
 		super(posX, posY, app);
 		
 		piraProjectile = app.loadImage("data/thorns.png");
+		piraProjectileL = app.loadImage("data/thornsL.png");
 		
 	}
 
 	@Override
 	public void draw() {
 		movement();
-	app.image(piraProjectile, posX, posX);
+	if(direction==true) {
+	app.image(piraProjectile, posX, posY);}
+	if(direction==false) {
+		app.image(piraProjectileL, posX, posY);}
 		
 	}
 

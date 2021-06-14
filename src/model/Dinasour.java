@@ -21,7 +21,7 @@ public class Dinasour extends Enemy implements EnemyCommonActions, Runnable{
 	public Dinasour(int posX, int posY, int value, int lives, PApplet app, int objX) {
 		super(posX, posY, value, lives, app);
 		this.objX = objX;
-		speed = 4;
+		speed = 3;
 		dinoPic = app.loadImage("data/trex.png");
 		
 		state = 1;
@@ -61,6 +61,10 @@ public class Dinasour extends Enemy implements EnemyCommonActions, Runnable{
 	public void drawEenemy() {
 		//app.fill(200,50,100);
 		///app.circle(posX, posY, 50);
+		if(lives == 0) {
+			state = 3;
+		}
+		
 		switch(state) {
 		case 0:
 			app.image(dinoPic, posX, posY);
@@ -78,12 +82,42 @@ public class Dinasour extends Enemy implements EnemyCommonActions, Runnable{
 			}else {
 				attackAnimationL();
 			}
-			
 			break;
 		case 3:
+			if(dir) {
+				dieAnimR();
+			}else {
+				dieAnimL();
+			}
 			break;
 		}
 		movement();
+	}
+
+	private void dieAnimR() {
+		dieTimer++;
+		if(dieTimer >= 0 && dieTimer < 15) {
+			app.image(dinoDieR[0], posX, posY);
+		}else if(dieTimer >= 15 && dieTimer < 30) {
+			app.image(dinoDieR[1], posX, posY);
+		}if(dieTimer >= 30 && dieTimer < 45) {
+			app.image(dinoDieR[2], posX, posY);
+		}else if(dieTimer >= 45){
+			app.image(dinoDieR[3], posX, posY);
+		}
+	}
+
+	private void dieAnimL() {
+		dieTimer++;
+		if(dieTimer >= 0 && dieTimer < 15) {
+			app.image(dinoDieL[0], posX, posY);
+		}else if(dieTimer >= 15 && dieTimer < 30) {
+			app.image(dinoDieL[1], posX, posY);
+		}if(dieTimer >= 30 && dieTimer < 45) {
+			app.image(dinoDieL[2], posX, posY);
+		}else if(dieTimer >= 45){
+			app.image(dinoDieL[3], posX, posY);
+		}
 	}
 
 	private void attackAnimationL() {
@@ -144,15 +178,17 @@ public class Dinasour extends Enemy implements EnemyCommonActions, Runnable{
 
 	@Override
 	public void movement() {
-		if(Math.abs(posX-objX) < 200) {
-			state = 2;
-		}
-		if(posX < objX) {
-			posX+=speed;
-			dir = true;
-		}else if(posX > objX){
-			posX-=speed;
-			dir = false;
+		if(state != 3) {
+			if(Math.abs(posX-objX) < 200) {
+				state = 2;
+			}
+			if(posX < objX) {
+				posX+=speed;
+				dir = true;
+			}else if(posX > objX){
+				posX-=speed;
+				dir = false;
+			}
 		}
 	}
 
