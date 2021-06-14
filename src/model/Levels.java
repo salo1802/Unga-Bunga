@@ -25,9 +25,9 @@ public class Levels {
 	private Obstacle[] obstacles;
 	
 	private int changeEggTimer;
-	private int changeEgg;
-	
 	private int changeEggX, changeEggY;
+	
+	private boolean toachEgg;
 	
 	public Levels(PApplet app, Player p) {
 		
@@ -45,12 +45,13 @@ public class Levels {
 
 		
 		changeEggTimer = 1200;
-		changeEgg = 0; //
 		
 		changeLevel = 0; // 0 = C, 1 = D, 2 = A, 3 = B
 		
-		changeEggX = 500;
-		changeEggY = 500;
+		changeEggX = 1750;
+		changeEggY = 490;
+		
+		toachEgg = false;
 		
 		/*obX = new Obstacle(790, 620, 305, 180, app);
 		pira = new Plant(-100, -200, 0, 0, app);
@@ -78,27 +79,57 @@ public class Levels {
 			verifyTrex();
 			
 			changeEggTimer --;
-			if(changeEggTimer == 0) {
+			if(changeLevel == 0 && changeEggTimer <= 0) {
 				app.image(nextLevel, changeEggX, changeEggY);
-				changeEgg = 0;
-				//changeEggTimer = 1200;
+				toachEgg = true;
+				changeEggTimer = 1200;
 			}
-			
+
 			break;
 		case 1: // down right
+			setChangeEggX(1400);
+			setChangeEggY(360);
+			
 			app.image(level1D, 960, 450);
 			if(!change) {
 				updateLevel2();
 				change = true;
 			}
+			changeEggTimer --;	
+			if(changeLevel == 1 && changeEggTimer <= 0) {
+				app.image(nextLevel, changeEggX, changeEggY);
+				toachEgg = true;
+			}	
 			break;
 		case 2: // up left
+			setChangeEggX(1400);
+			setChangeEggY(360);
+			
 			app.image(level1A, 960, 450);
-				updateLevel1();		
+				updateLevel1();	
+	
+				if(!change) {
+					updateLevel2();
+					change = true;
+				}
+				changeEggTimer --;	
+				if(changeLevel == 2 && changeEggTimer <= 0) {
+					app.image(nextLevel, changeEggX, changeEggY);
+					toachEgg = true;
+				}	
 			break;
 		case 3: // up right
+			setChangeEggX(1400);
+			setChangeEggY(360);
+			
 			app.image(level1B, 960, 450);
 			updateLevel3();
+			
+			changeEggTimer --;	
+			if(changeLevel == 3 && changeEggTimer <= 0) {
+				app.image(nextLevel, changeEggX, changeEggY);
+				toachEgg = true;
+			}
 			break;
 
 		default:
@@ -113,21 +144,57 @@ public class Levels {
 		thero.drawEenemy();
 		pira.drawEenemy();
 		
-		//changeLevel();
+		changeLevel();
 		
 	}
 	
 	public void changeLevel() {
-		switch (changeEgg) {
-		case 0:
+		if(changeLevel == 0) {
+			
 			if((int) PApplet.dist(player.getPosX(), player.getPosY(),
-					changeEggX, changeEggY) > 25) {
-				changeLevel = 1;
+					changeEggX, changeEggY) < 25) {
+				if(toachEgg == true) {
+					changeLevel = 1;
+					player.setPosX(100);
+					player.setPosY(200);
+					toachEgg = false;
+				}
 			}
-			break;
-
-		default:
-			break;
+		}
+		
+		if(changeLevel == 1) {
+				
+			if((int) PApplet.dist(player.getPosX(), player.getPosY(),
+					changeEggX, changeEggY) < 25) {
+				System.out.println("touch");
+				if(toachEgg == true) {
+					changeLevel = 2;
+					player.setPosX(100);
+					player.setPosY(200);
+					toachEgg = false;
+				}
+			}
+		}
+		if(changeLevel == 2) {
+			
+			if((int) PApplet.dist(player.getPosX(), player.getPosY(),
+					changeEggX, changeEggY) < 25) {
+				System.out.println("touch");
+				if(toachEgg == true) {
+					changeLevel = 3;
+					player.setPosX(100);
+					player.setPosY(200);
+					toachEgg = false;
+				}
+			}
+		}
+		if(changeLevel == 3) {
+			
+			if((int) PApplet.dist(player.getPosX(), player.getPosY(),
+					changeEggX, changeEggY) < 25) {
+				System.out.println("touch");
+				
+			}
 		}
 	}
 
@@ -230,4 +297,27 @@ public class Levels {
 		this.player = player;
 	}
 
+	public int getChangeEggX() {
+		return changeEggX;
+	}
+
+	public void setChangeEggX(int changeEggX) {
+		this.changeEggX = changeEggX;
+	}
+
+	public int getChangeEggY() {
+		return changeEggY;
+	}
+
+	public void setChangeEggY(int changeEggY) {
+		this.changeEggY = changeEggY;
+	}
+
+	public int getChangeEggTimer() {
+		return changeEggTimer;
+	}
+
+	public void setChangeEggTimer(int changeEggTimer) {
+		this.changeEggTimer = changeEggTimer;
+	}
 }
