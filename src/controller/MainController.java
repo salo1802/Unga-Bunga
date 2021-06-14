@@ -2,6 +2,9 @@ package controller;
 
 import java.io.IOException;
 
+import model.EmptyFieldException;
+import model.InvalidInputException;
+import model.Logic;
 import processing.core.PApplet;
 
 public class MainController {
@@ -14,6 +17,7 @@ public class MainController {
 	private GameScreen gamescreen;
 	private EnterNameScreen namescreen;
 	private ScoreScreen scorescreen;
+	private Logic logic;
 	
 	//change screens
 	private int screen;
@@ -23,10 +27,11 @@ public class MainController {
 		
 		screen = 0;
 		
+		logic = new Logic(app);
 		menuscreen = new MenuScreen(app);
 		introscreen = new IntroScreen(app);
 		gamescreen = new GameScreen(app);
-		namescreen = new EnterNameScreen(app);
+		namescreen = new EnterNameScreen(app, logic);
 		scorescreen = new ScoreScreen(app);
 		
 	}
@@ -112,7 +117,20 @@ public class MainController {
 			&& mouseX < (840 + (300 / 2))
 			&& mouseY > (680 - (100 / 2))
 			&& mouseY < (680 + (100 / 2))) {
-			screen = 4;
+			boolean added = true;
+			try {
+				added = namescreen.verifyInputText();
+			} catch (EmptyFieldException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvalidInputException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(added) {
+				screen = 4;
+			}
+			
 		}
 		
 		//Score Screen --> Menu Screen

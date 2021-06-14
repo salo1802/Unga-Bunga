@@ -1,5 +1,6 @@
 package model;
 
+import model.Player;
 import processing.core.PApplet;
 
 public class Logic {
@@ -17,6 +18,11 @@ public class Logic {
 	
 	public void sortScores() {
 		
+	}
+
+	public Player searchPlayer(String username) {
+		
+		return null;
 	}
 
 }
