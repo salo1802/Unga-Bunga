@@ -33,7 +33,7 @@ public class MainController {
 		introscreen = new IntroScreen(app);
 		gamescreen = new GameScreen(app);
 		namescreen = new EnterNameScreen(app, logic);
-		scorescreen = new ScoreScreen(app);
+		scorescreen = new ScoreScreen(app, logic);
 		
 		namescreen.deleteTextField();
 	}
@@ -76,6 +76,8 @@ public class MainController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			namescreen.drawScreem();
 			break;
 		case 4:
 			scorescreen.draw();
@@ -137,6 +139,8 @@ public class MainController {
 			if(added) {
 				screen = 4;
 				logic.getPlayers().add(gamescreen.getP());
+				logic.sortByName();
+				namescreen.deleteTextField();
 			}
 			
 		}
@@ -158,5 +162,19 @@ public class MainController {
 		this.gamescreen = gamescreen;
 	}
 
-	
+	public int getScreen() {
+		return screen;
+	}
+
+	public void setScreen(int screen) {
+		this.screen = screen;
+	}
+
+	public EnterNameScreen getNamescreen() {
+		return namescreen;
+	}
+
+	public void setNamescreen(EnterNameScreen namescreen) {
+		this.namescreen = namescreen;
+	}
 }

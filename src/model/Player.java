@@ -20,7 +20,7 @@ public class Player implements Comparable<Player>, Runnable{
 	private PImage[] imagesjumpingL;
 	private PImage playerStandL;
 	
-	private int posX, posY, score, lives, vel;
+	private int posX, posY, lives, vel;
 	private int gravity, jumpFactor;
 	private int fallTime;
 	private int invulnerableTime;
@@ -35,7 +35,9 @@ public class Player implements Comparable<Player>, Runnable{
 	private boolean test;
 	private boolean can;
 	private String gameDate;
-	private int playTime;
+	private long playTime, score;
+	
+	//info sort
 	private String username;
 	
 	private GameScreen gameScreen;	
@@ -76,11 +78,11 @@ public class Player implements Comparable<Player>, Runnable{
 	
 	
 
-	public Player(String username, int score, int playTime, String gameDate) {
+	public Player(String username, long actualScore, long actualTime, String gameDate) {
 		super();
-		this.score = score;
+		this.score = actualScore;
 		this.gameDate = gameDate;
-		this.playTime = playTime;
+		this.playTime = actualTime;
 		this.username = username;
 	}
 	
@@ -344,11 +346,11 @@ public class Player implements Comparable<Player>, Runnable{
 		this.posY = posY;
 	}
 
-	public int getScore() {
+	public long getScore() {
 		return score;
 	}
 
-	public void setScore(int score) {
+	public void setScore(long score) {
 		this.score = score;
 	}
 
@@ -374,8 +376,7 @@ public class Player implements Comparable<Player>, Runnable{
 
 	@Override
 	public int compareTo(Player o) {
-		
-		return 0;
+		return username.compareTo(o.getUsername());
 	}
 
 	public int getGravity() {
@@ -420,11 +421,11 @@ public class Player implements Comparable<Player>, Runnable{
 		this.gameDate = gameDate;
 	}
 
-	public int getPlayTime() {
+	public long getPlayTime() {
 		return playTime;
 	}
 
-	public void setPlayTime(int playTime) {
+	public void setPlayTime(long playTime) {
 		this.playTime = playTime;
 	}
 
@@ -434,5 +435,9 @@ public class Player implements Comparable<Player>, Runnable{
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public String toString() {
+		return username+ "***|***"+ score+"***|***"+playTime+"***|***"+gameDate;
 	}
 }

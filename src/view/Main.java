@@ -72,7 +72,10 @@ public class Main extends PApplet{
 		//update dinos objective
 		controller.getGamescreen().getLevels().getPira().setPlayerX(controller.getGamescreen().getP().getPosX());
 		controller.getGamescreen().getLevels().getDino().setObjX(controller.getGamescreen().getP().getPosX());
+		
 	}
+			
+				
 	
 	@Override
 	public void keyReleased() {
