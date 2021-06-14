@@ -3,11 +3,11 @@ package model;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class PowerUps {
+public abstract class PowerUps {
 	
-	private PApplet app;
+	protected PApplet app;
 	
-	private int posX, posY;
+	protected int posX, posY;
 	
 	public PowerUps(int posX, int posY, PApplet app) {
 		this.posX = posX;
@@ -16,9 +16,7 @@ public class PowerUps {
 		
 	}
 	
-	public void drawPowerUps() {
-		
-	}
+	public abstract void drawPowerUps();
 
 	public int getPosX() {
 		return posX;
