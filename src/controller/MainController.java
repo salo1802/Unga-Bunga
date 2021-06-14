@@ -44,7 +44,10 @@ public class MainController {
 			if(gamescreen.getP().getLives() == 0) {
 				screen = 3;
 				gamescreen.getP().setLives(1);
+				gamescreen.setStopTime(System.currentTimeMillis());
 			}
+			
+			
 			break;
 		case 3:
 			namescreen.draw();

@@ -45,6 +45,12 @@ public class GameScreen {
 		level1 = new Levels(app, p);
 	}
 	
+	public long calculatePlayTime() {
+		
+		p.setScore((int)(stopTime - startTime)*2);
+		return stopTime - startTime;
+		
+	}
 
 	public void drawLevel() {
 		
