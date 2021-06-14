@@ -141,4 +141,9 @@ public class Plant extends Enemy implements EnemyCommonActions{
 		// TODO Auto-generated method stub
 		return super.getValue();
 	}
+	public int getPlayerX() {
+		return playerX;
+	}
+	
+	
 }

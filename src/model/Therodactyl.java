@@ -18,7 +18,7 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 	private PImage[] theroDeathL;
 	
 	private ArrayList<TheroProject> theroProject;
-	private int eggTimer;
+	private int eggTimer, eggC;
 
 	public Therodactyl(int posX, int posY, int value, int lives, PApplet app) {
 		super(posX, posY, value, lives, app);
@@ -34,6 +34,7 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 		
 		theroProject = new ArrayList<TheroProject>();
 		eggTimer = 60;
+		eggC = 60;
 		loadImages();
 	}
 	
@@ -61,7 +62,7 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 				
 				theroProject.add(newTP);
 				
-				eggTimer = 60;
+				eggTimer = eggC;
 				}
 			
 			for (int i = 0; i < theroProject.size(); i++) {
@@ -199,7 +200,14 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 	public void setTheroProject(ArrayList<TheroProject> theroProject) {
 		this.theroProject = theroProject;
 	}
-	
-	
+
+	public int getEggC() {
+		return eggC;
+	}
+
+	public void setEggC(int eggC) {
+		this.eggC = eggC;
+	}
+
 
 }
