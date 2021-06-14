@@ -42,6 +42,7 @@ public class Levels {
 		nextLevel = app.loadImage("data/bonusEgg.png");
 		
 		obstacles = new Obstacle[3];
+
 		
 		changeEggTimer = 1200;
 		changeEgg = 0; //
