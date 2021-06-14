@@ -33,8 +33,8 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 		theroDeathL = new PImage[3];
 		
 		theroProject = new ArrayList<TheroProject>();
-		eggTimer = 60;
-		eggC = 60;
+		eggTimer = 40;
+		eggC = 40;
 		loadImages();
 	}
 	
