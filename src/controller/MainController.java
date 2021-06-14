@@ -45,6 +45,7 @@ public class MainController {
 				screen = 3;
 				gamescreen.getP().setLives(1);
 				gamescreen.setStopTime(System.currentTimeMillis());
+				gamescreen.calculatePlayTime();
 			}
 			
 			
