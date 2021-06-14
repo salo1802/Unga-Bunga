@@ -17,7 +17,7 @@ public class MenuScreen {
 	
 	public void draw(){
 		
-		app.image(menu, 540, 460, 1080, 920);
+		app.image(menu, 940, 460, 1080, 920);
 		
 	}
 
