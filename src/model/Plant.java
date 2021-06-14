@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -20,7 +22,7 @@ public class Plant extends Enemy implements EnemyCommonActions{
 	private int playerX;
 	private int time=0;
 	private int attacktimer=60;
-	PiraProject projectile;
+	private ArrayList<PiraProject> project;
 	
 	public Plant(int posX, int posY, int value, int lives, PApplet app) {
 		super(posX, posY, value, lives, app);
@@ -33,7 +35,7 @@ public class Plant extends Enemy implements EnemyCommonActions{
 		rightAnimation = true;
 		died = false;
 		playerX = 0;
-		projectile = new PiraProject(posX, posY, app);
+		project = new ArrayList<PiraProject>();
 	}
 	public void loadImages() {
 		still = app.loadImage("data/piranaPlant.png");
@@ -49,48 +51,50 @@ public class Plant extends Enemy implements EnemyCommonActions{
 	
 	@Override
 	public void actions() {
+		attacktimer++;
 		super.actions();
 	if (lives==0) {state=DEATH;}
-	attacktimer--;
-	if(attacktimer==60) {
-	projectile.setPosX(posX);
-	if(rightAnimation==true) {projectile.setDirection(true);}
-	if(rightAnimation==false) {projectile.setDirection(false);}
+	if(attacktimer>=60) {
+	PiraProject newAmo;
+	newAmo = new PiraProject(posX, posY, app);
+	if(rightAnimation==true) {newAmo.setDirection(true);}
+	if(rightAnimation==false) {newAmo.setDirection(false);}
+	project.add(newAmo);
+	state = SHOOT;
 	attacktimer = 0;}
-	projectile.draw();
 	}
 
 	@Override
-	public void drawEenemy() { 
+	public void drawEenemy() {
 	movement();
 	actions();
+	for(int i=0;i< project.size();i++) {project.get(i).draw();}
 	switch(state) {
 	case STILL:
 	if(rightAnimation==true) {app.image(still, posX, posY);}
 	if(rightAnimation==false) {app.image(stillL, posX, posY);}
 	break;
-	case SHOOT:
-	if(app.frameCount%9==0) {time=0;}
-	if(app.frameCount%3==0) {time++;}
+	case SHOOT:	
 	if(rightAnimation==true) {
-	if(time==1) {app.image(attack[0], posX, posY);}
-	if(time==2) {app.image(attack[1], posX, posY);}
-	if(time==3) {app.image(attack[2], posX, posY);}}
+	if(attacktimer>=0&&attacktimer<1) {app.image(attack[0], posX, posY);}
+	if(attacktimer>=1&&attacktimer<3) {app.image(attack[1], posX, posY);}
+	if(attacktimer>=3) {app.image(attack[2], posX, posY);}}
 	if(rightAnimation==false) {
 		for(int i=0; i < attackL.length;i++) {
-			if(time==1) {app.image(attackL[0], posX, posY);}
-			if(time==2) {app.image(attackL[1], posX, posY);}
-			if(time==3) {app.image(attackL[2], posX, posY);}}}
-		state=STILL;
+			if(attacktimer>=0&&attacktimer<1) {app.image(attackL[0], posX, posY);}
+			if(attacktimer>=1&&attacktimer<3) {app.image(attackL[1], posX, posY);}
+			if(attacktimer>=3) {app.image(attackL[2], posX, posY);}}}
+	if(attacktimer==5) {	state=STILL;}
 		
 	break;
 	case DEATH:
-		if(app.frameCount%20==0) {time = 0;}
-		if(app.frameCount%2==0) {time++;}
+		time++;
 		if(died==false) {
 		for(int i=0; i < death.length;i++) {
 		if(time==i) {app.image(death[i], posX, posY);}
-		died = true;}}
+		//died = true;
+		if(time==death.length) {died=true;}
+		}}
 		break;}
 		
 	}
