@@ -86,13 +86,21 @@ public class MainController {
 			screen = 2;
 		}
 		
-		//name Screen --> score Screen
+		//Name Screen --> Score Screen
 		if (screen == 3 && mouseX > (840 - (300 / 2))
 			&& mouseX < (840 + (300 / 2))
 			&& mouseY > (680 - (100 / 2))
 			&& mouseY < (680 + (100 / 2))) {
 			screen = 4;
 		}
+		
+		//Score Screen --> Menu Screen
+		if (screen == 4 && mouseX > (170 - (290 / 2))
+				&& mouseX < (170 + (290 / 2))
+				&& mouseY > (90 - (100 / 2))
+				&& mouseY < (90 + (100 / 2))) {
+				screen = 0;
+			}
 	}
 
 	public GameScreen getGamescreen() {
