@@ -125,6 +125,17 @@ public class GameScreen {
 				level1.getThero().getTheroProject().remove(i);
 			}
 		}
+		
+		//pirana damage
+		for (int i = 0; i < level1.getPira().getProject().size(); i++) {
+			
+			if((int) PApplet.dist(p.getPosX(), p.getPosY(), 
+					level1.getPira().getProject().get(i).getPosX(), 
+					level1.getPira().getProject().get(i).getPosY()) < 25) {
+				p.setLives(p.getLives()-1);
+				level1.getPira().getProject().remove(i);
+			}
+		}
 	}
 	
 	public Player getP() {

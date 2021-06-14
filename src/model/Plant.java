@@ -62,6 +62,13 @@ public class Plant extends Enemy implements EnemyCommonActions{
 	project.add(newAmo);
 	state = SHOOT;
 	attacktimer = 0;}
+	
+	for (int i = 0; i < project.size(); i++) {
+		
+		if(project.get(i).getPosX() > 1920 || project.get(i).getPosX() < 0) {
+			project.remove(i);
+			}
+		}
 	}
 
 	@Override
@@ -145,5 +152,11 @@ public class Plant extends Enemy implements EnemyCommonActions{
 		return playerX;
 	}
 	
+	public ArrayList<PiraProject> getProject() {
+		return project;
+	}
+	public void setProject(ArrayList<PiraProject> project) {
+		this.project = project;
+	}
 	
 }
