@@ -43,6 +43,15 @@ public class GameScreen {
 		
 		p = new Player(50, 100, 0, 5, 3, app, this, 0, "user");
 		level1 = new Levels(app, p);
+		try {
+			loadHighscore();
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public long calculatePlayTime() {
@@ -50,6 +59,14 @@ public class GameScreen {
 		p.setScore((int)(stopTime - startTime)*2);
 		return stopTime - startTime;
 		
+	}
+	
+	
+	// este método se usa solo cuando se ha finalizado el juego y sirve para agregar 
+	// el jugador anterior o la tabla de highscores
+	public void addPlayerToHighscore() {
+		
+		highscores.add(p);
 	}
 
 	public void drawLevel() {
