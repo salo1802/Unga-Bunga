@@ -40,7 +40,6 @@ public class Player implements Comparable<Player>, Runnable{
 	//info sort
 	private String username;
 	
-	
 	private GameScreen gameScreen;	
 	
 

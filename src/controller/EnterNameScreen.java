@@ -102,8 +102,7 @@ public class EnterNameScreen {
 
 
 	public String getText() {
-		String t = "";
-		t = cp5.get(Textfield.class, "txtUser").getText();
+		String t = cp5.get(Textfield.class, "txtUser").getText();
 		return t;
 	}
 
