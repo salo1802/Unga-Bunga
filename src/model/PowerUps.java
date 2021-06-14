@@ -6,27 +6,17 @@ import processing.core.PImage;
 public class PowerUps {
 	
 	private PApplet app;
-	private PImage powers; // there will be more than 1 typo of powerUp
 	
 	private int posX, posY;
 	
-	private int powerUpType;
-	
-	private boolean usedIt;
-	
-	public PowerUps(int posX, int posY, int powerUpType, PApplet app) {
+	public PowerUps(int posX, int posY, PApplet app) {
 		this.posX = posX;
 		this.posY = posY;
-		this.powerUpType = powerUpType;
 		this.app = app;
 		
 	}
 	
-	public void drawPowerUps() { // switch?
-		
-	}
-	
-	public void interaction() {
+	public void drawPowerUps() {
 		
 	}
 
@@ -45,15 +35,5 @@ public class PowerUps {
 	public void setPosY(int posY) {
 		this.posY = posY;
 	}
-
-	public int getPowerUpType() {
-		return powerUpType;
-	}
-
-	public void setPowerUpType(int powerUpType) {
-		this.powerUpType = powerUpType;
-	}
-	
-	
 
 }
