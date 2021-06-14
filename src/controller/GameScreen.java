@@ -1,5 +1,12 @@
 package controller;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import model.Levels;
 import model.Player;
 import model.TheroProject;
@@ -20,15 +27,25 @@ public class GameScreen {
 	
 	private boolean changeLevel1, changeLevel2, changeLevel3;
 	
+	private ArrayList<Player> highscores;
+	public final static String URL_SAVE_HIGHSCORES = "./data/users.txt";
+	
+	private long startTime;
+	private long stopTime;
+	
 	
 	public GameScreen(PApplet app) {
 		this.app = app;
 		
 		levelNumber = 1; //1 = level 1, 2 = level 2, 3 = level 3
+		startTime = System.currentTimeMillis();
+		
+		
 		p = new Player(50, 100, 0, 5, 3, app, this);
-		level1 = new Levels(app, p);		
+		level1 = new Levels(app, p);
 	}
 	
+
 	public void drawLevel() {
 		
 		
@@ -118,6 +135,74 @@ public class GameScreen {
 	public void setLevels(Levels level1) {
 		this.level1 = level1;
 	}
+	public long getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(long startTime) {
+		this.startTime = startTime;
+	}
+
+	public long getStopTime() {
+		return stopTime;
+	}
+
+	public void setStopTime(long stopTime) {
+		this.stopTime = stopTime;
+	}
+
 	
+	/*
+	 * Este método se utiliza para producir el archivo de texto plano con los datos del jugador
+	 */
+	public void saveHighscoreTxt() throws IOException {
+
+		
+		FileWriter escribir = new FileWriter(URL_SAVE_HIGHSCORES);
+		BufferedWriter buffer = new BufferedWriter(escribir);
+
+		for (int i = 0; i < highscores.size(); i++) {
+			String linea = highscores.get(i).getUsername() + "," + highscores.get(i).getScore() + ","
+					+ highscores.get(i).getPlayTime() + "," + highscores.get(i).getGameDate();
+			try {
+				buffer.write(linea);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		try {
+			buffer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/*
+	 * En este método de FileReader se utiliza para transformar el texto plano en arreglo
+	 */
+	public void loadHighscore() throws NumberFormatException, IOException {
+		
+		BufferedReader br = new BufferedReader(new FileReader(URL_SAVE_HIGHSCORES));
+		
+		String r;
+		while((r = br.readLine()) != null) {
+			String[] g = r.split(",");
+			Player w = new Player(g[0], Integer.parseInt(g[1]), Integer.parseInt(g[2]), g[3]);
+			highscores.add(w);
+			
+		}
+		
+	
+		try {
+			br.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }
