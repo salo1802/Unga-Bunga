@@ -10,6 +10,8 @@ public class Levels {
 	private PImage level1C; //down left
 	private PImage level1D; //down right
 	
+	private PImage nextLevel;
+	
 	private int changeLevel;
 	
 	private boolean change;
@@ -22,6 +24,11 @@ public class Levels {
 	private Player player;
 	private Obstacle[] obstacles;
 	
+	private int changeEggTimer;
+	private int changeEgg;
+	
+	private int changeEggX, changeEggY;
+	
 	public Levels(PApplet app, Player p) {
 		
 		player = p;
@@ -31,17 +38,23 @@ public class Levels {
 		level1B = app.loadImage("data/nivel1B.png");
 		level1C = app.loadImage("data/nivel1C.png");
 		level1D = app.loadImage("data/nivel1D.png");
+		
+		nextLevel = app.loadImage("data/bonusEgg.png");
+		
 		obstacles = new Obstacle[3];
 		
+		changeEggTimer = 1200;
+		changeEgg = 0; //
+		
 		changeLevel = 0; // 0 = C, 1 = D, 2 = A, 3 = B
-
 		
-		obX = new Obstacle(790, 620, 305, 180, app);
+		changeEggX = 500;
+		changeEggY = 500;
 		
-		
+		/*obX = new Obstacle(790, 620, 305, 180, app);
 		pira = new Plant(-100, -200, 0, 0, app);
 		dino = new Dinasour(1000, 750, 50, 1, app, 0);
-		thero = new Therodactyl(300, 100, 0, 5, app);
+		thero = new Therodactyl(300, 100, 0, 5, app);*/
 		
 		loadInitialLevel();
 	}
@@ -52,6 +65,7 @@ public class Levels {
 		obstacles[2] = new Obstacle(1200, 470, 510, 160, app);
 		dino = new Dinasour(1300, 750, 50, 1, app, 0);
 		thero = new Therodactyl(300, 100, 0, 5, app);
+		pira = new Plant(-100, -200, 0, 0, app);
 	}
 
 	public void draw() {
@@ -59,8 +73,16 @@ public class Levels {
 		switch (changeLevel) {
 		case 0: // down left
 			app.image(level1C, 960, 450);
-			loadInitialLevel();
+			//loadInitialLevel();
 			verifyTrex();
+			
+			changeEggTimer --;
+			if(changeEggTimer == 0) {
+				app.image(nextLevel, changeEggX, changeEggY);
+				changeEgg = 0;
+				//changeEggTimer = 1200;
+			}
+			
 			break;
 		case 1: // down right
 			app.image(level1D, 960, 450);
@@ -89,6 +111,23 @@ public class Levels {
 		dino.drawEenemy();
 		thero.drawEenemy();
 		pira.drawEenemy();
+		
+		//changeLevel();
+		
+	}
+	
+	public void changeLevel() {
+		switch (changeEgg) {
+		case 0:
+			if((int) PApplet.dist(player.getPosX(), player.getPosY(),
+					changeEggX, changeEggY) > 25) {
+				changeLevel = 1;
+			}
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	private void updateLevel3() {
