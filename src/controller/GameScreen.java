@@ -240,4 +240,9 @@ public class GameScreen {
 		}
 	}
 	
+	public void resetP() {
+		p = new Player(50, 100, 0, 5, 3, app, this, 0, "user");
+		level1.setPlayer(p);
+	}
+
 }
