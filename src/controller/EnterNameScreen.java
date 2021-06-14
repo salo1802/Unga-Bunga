@@ -57,7 +57,7 @@ public class EnterNameScreen {
 	public void drawScreem() {
 		app.textSize(30);
 		app.fill(200);
-		app.text(username, 300, 300);
+		//app.text(username, 300, 300);		
 	}
 
 
@@ -107,5 +107,5 @@ public class EnterNameScreen {
 		return t;
 	}
 
-
+	
 }

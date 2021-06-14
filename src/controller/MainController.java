@@ -33,7 +33,7 @@ public class MainController {
 		introscreen = new IntroScreen(app);
 		gamescreen = new GameScreen(app);
 		namescreen = new EnterNameScreen(app, logic);
-		scorescreen = new ScoreScreen(app);
+		scorescreen = new ScoreScreen(app, logic);
 		
 		namescreen.deleteTextField();
 	}
@@ -76,6 +76,8 @@ public class MainController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			namescreen.drawScreem();
 			break;
 		case 4:
 			scorescreen.draw();
@@ -137,6 +139,7 @@ public class MainController {
 			if(added) {
 				screen = 4;
 				logic.getPlayers().add(gamescreen.getP());
+				logic.sortByName();
 				namescreen.deleteTextField();
 			}
 			

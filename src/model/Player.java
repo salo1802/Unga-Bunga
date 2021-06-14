@@ -36,7 +36,10 @@ public class Player implements Comparable<Player>, Runnable{
 	private boolean can;
 	private String gameDate;
 	private int playTime;
+	
+	//info sort
 	private String username;
+	
 	
 	private GameScreen gameScreen;	
 	
@@ -374,8 +377,7 @@ public class Player implements Comparable<Player>, Runnable{
 
 	@Override
 	public int compareTo(Player o) {
-		
-		return 0;
+		return username.compareTo(o.getUsername());
 	}
 
 	public int getGravity() {
@@ -434,5 +436,9 @@ public class Player implements Comparable<Player>, Runnable{
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public String toString() {
+		return username+ "***|***"+ score+"***|***"+playTime+"***|***"+gameDate;
 	}
 }
