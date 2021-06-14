@@ -41,7 +41,7 @@ public class Player implements Comparable<Player>, Runnable{
 	private GameScreen gameScreen;	
 	
 
-	public Player(int posX, int posY, int score, int lives, int vel, PApplet app, GameScreen gs, String gameDate, int playTime, String username) {
+	public Player(int posX, int posY, int score, int lives, int vel, PApplet app, GameScreen gs, int playTime, String username) {
 
 		this.app = app;
 		this.posX = posX;
