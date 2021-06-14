@@ -74,11 +74,11 @@ public class MainController {
 		}
 		
 		//Intro Screen --> Game Screen
-		if (screen == 1 && mouseX > (0 - (1080 / 2))
-				&& mouseX < (1800 + (1080 / 2))
-				&& mouseY > (0 - (920 / 2))
-				&& mouseY < (920 + (920 / 2))) {
-			screen = 1;
+		if (screen == 1 && mouseX > (840 - (300 / 2))
+				&& mouseX < (840 + (300 / 2))
+				&& mouseY > (730 - (100 / 2))
+				&& mouseY < (730 + (100 / 2))) {
+			screen = 2;
 
 		}
 	}
