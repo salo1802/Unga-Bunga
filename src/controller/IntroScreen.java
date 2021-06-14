@@ -16,7 +16,7 @@ public class IntroScreen {
 	
 	public void draw() {
 		
-		app.image(intros, 0, 0, 1080, 920);
+		app.image(intros, 960, 450);
 		
 	}
 

@@ -17,7 +17,7 @@ public class ScoreScreen {
 	
 	public void draw() {
 		
-		app.image(score, 0, 0, 1080, 920);
+		app.image(score, 960, 450);
 		
 	}
 	

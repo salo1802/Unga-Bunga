@@ -17,7 +17,7 @@ public class EnterNameScreen {
 	
 	public void draw(){
 		
-		app.image(nameScreen, 0, 0, 1080, 920);
+		app.image(nameScreen, 960, 450);
 		
 	}
 

@@ -28,25 +28,16 @@ public class Main extends PApplet{
 	
 	@Override
 	public void draw() {
-		//System.out.println(mouseX + "," + mouseY);
+		
+		System.out.println(mouseX + "," + mouseY);
+		
 		imageMode(CENTER);
 		rectMode(CENTER);
 		background(40);	
-		//controller.drawScreens();
 
 		textSize(20);
-		fill(255);
-		//if(p.isFalling()) {
-		
-		//}
-		
-		/*if(dist(p.getPosX(), p.getPosY(), d.getPosX(), d.getPosY()) < 30) {
-			p.setLives(p.getLives()-1);
-		}*/
+
 		controller.drawScreens();
-
-		//controller.drawScreens();
-
 	}
 	
 	@Override

@@ -16,9 +16,9 @@ public class GameScreen {
 	private Level1 level1;
 	private Level2 level2;
 	private Level3 level3;
-	private Player p;
-	private Therodactyl thero;
 	
+	private Player p;
+
 	boolean moveR, moveL;
 	
 	private int levelNumber;
@@ -35,7 +35,6 @@ public class GameScreen {
 		level2 = new Level2(app);
 		level3 = new Level3(app);
 
-		thero = new Therodactyl(300, 50, 0, 5, app);
 		p = new Player(50, 100, 0, 5, 3, app, this);
 		
 	}
@@ -45,6 +44,12 @@ public class GameScreen {
 		switch (levelNumber) {
 		case 1:
 			level1.draw();
+			break;
+		case 2:
+			level2.draw();
+			break;
+		case 3:
+			level3.draw();
 			break;
 
 		default:
@@ -71,13 +76,11 @@ public class GameScreen {
 		}
 		if(moveR) {
 			if(playerPX+5 > opx-length && playerPY < opy+height && playerPY > opy-height && playerPX < opx+length) {
-				//p.setPosX(p.getPosX()-1);
+				
 			}else {
 				p.movement(5);
 			}
 		}
-		
-		thero.drawEenemy();
 		
 		damagePlayer();
 		
@@ -86,13 +89,13 @@ public class GameScreen {
 	public void damagePlayer() {
 		
 		//eggs damage
-		for (int i = 0; i < thero.getTheroProject().size(); i++) {
+		for (int i = 0; i < level1.getThero().getTheroProject().size(); i++) {
 		
 			if((int) PApplet.dist(p.getPosX(), p.getPosY(), 
-					thero.getTheroProject().get(i).getPosX(), 
-					thero.getTheroProject().get(i).getPosY()) < 25) {
+					level1.getThero().getTheroProject().get(i).getPosX(), 
+					level1.getThero().getTheroProject().get(i).getPosY()) < 25) {
 				p.setLives(p.getLives()-1);
-				thero.getTheroProject().remove(i);
+				level1.getThero().getTheroProject().remove(i);
 			}
 		}
 	}

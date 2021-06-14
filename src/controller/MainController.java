@@ -26,6 +26,7 @@ public class MainController {
 		gamescreen = new GameScreen(app);
 		namescreen = new EnterNameScreen(app);
 		scorescreen = new ScoreScreen(app);
+		
 	}
 	
 	public void drawScreens() {
@@ -57,18 +58,18 @@ public class MainController {
 		
 		
 		//Menu Screen --> Score Screen
-		if (screen == 0 && mouseX > (220 - (440 / 2))
-				&& mouseX < (220 + (440 / 2))
-				&& mouseY > (720 - (100 / 2))
-				&& mouseY < (720 + (100 / 2))) {
+		if (screen == 0 && mouseX > (615 - (440 / 2))
+				&& mouseX < (615 + (440 / 2))
+				&& mouseY > (680 - (100 / 2))
+				&& mouseY < (680 + (100 / 2))) {
 			screen = 4;
 		}
 		
 		//Menu Screen --> Intro Screen
-		if (screen == 0 && mouseX > (780 - (300 / 2))
-				&& mouseX < (780 + (300 / 2))
-				&& mouseY > (720 - (100 / 2))
-				&& mouseY < (720 + (100 / 2))) {
+		if (screen == 0 && mouseX > (1080 - (300 / 2))
+				&& mouseX < (1080 + (300 / 2))
+				&& mouseY > (680 - (100 / 2))
+				&& mouseY < (680 + (100 / 2))) {
 			screen = 1;
 		}
 		
@@ -77,9 +78,8 @@ public class MainController {
 				&& mouseX < (1800 + (1080 / 2))
 				&& mouseY > (0 - (920 / 2))
 				&& mouseY < (920 + (920 / 2))) {
-			System.out.println("works");
-			screen = 2;
-			System.out.println(screen);
+			screen = 1;
+
 		}
 	}
 

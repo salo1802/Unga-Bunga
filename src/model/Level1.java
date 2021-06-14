@@ -5,30 +5,57 @@ import processing.core.PImage;
 
 public class Level1 {
 	
-	private PImage level1;
-	private int posX, posY;
+	private PImage level1A; //up left
+	private PImage level1B; //up right
+	private PImage level1C; //down left
+	private PImage level1D; //down right
+	
+	private int changeLevel;
+	
 	private PApplet app;
 	private Obstacle obX;
 	private Dinasour dino;
+	private Therodactyl thero;
 	
 	public Level1(PApplet app) {
 		
 		this.app = app;
 		
-		level1 = app.loadImage("data/nivel1.png");
+		level1A = app.loadImage("data/nivel1A.png");
+		level1B = app.loadImage("data/nivel1B.png");
+		level1C = app.loadImage("data/nivel1C.png");
+		level1D = app.loadImage("data/nivel1D.png");
+		
+		changeLevel = 0; // 0 = C, 1 = D, 2 = A, 3 = B
+		
 		obX = new Obstacle(500, 600, app);
 		dino = new Dinasour(1000, 650, 50, 1, app, 0);
-		posX = 200;
-		posY = 200;
+		thero = new Therodactyl(300, 50, 0, 5, app);
 	}
 	
 	public void draw() {
-		//app.fill(200);
-		//app.rect(0, 0, 3240, 1840);
 		
-		//app.image(level1, 1000, 900);
+		switch (changeLevel) {
+		case 0: // down left
+			app.image(level1C, 960, 450);
+			break;
+		case 1: // down right
+			app.image(level1D, 960, 450);
+			break;
+		case 2: // up left
+			app.image(level1A, 960, 450);
+			break;
+		case 3: // up right
+			app.image(level1B, 960, 450);
+			break;
+
+		default:
+			break;
+		}
+		
 		obX.drawObstacle();
 		dino.drawEenemy();
+		thero.drawEenemy();
 	}
 
 	public Obstacle getObX() {
@@ -39,22 +66,6 @@ public class Level1 {
 		this.obX = obX;
 	}
 
-	public int getPosX() {
-		return posX;
-	}
-
-	public void setPosX(int posX) {
-		this.posX = posX;
-	}
-
-	public int getPosY() {
-		return posY;
-	}
-
-	public void setPosY(int posY) {
-		this.posY = posY;
-	}
-
 	public Dinasour getDino() {
 		return dino;
 	}
@@ -63,5 +74,20 @@ public class Level1 {
 		this.dino = dino;
 	}
 
-	
+	public Therodactyl getThero() {
+		return thero;
+	}
+
+	public void setThero(Therodactyl thero) {
+		this.thero = thero;
+	}
+
+	public int getChangeLevel() {
+		return changeLevel;
+	}
+
+	public void setChangeLevel(int changeLevel) {
+		this.changeLevel = changeLevel;
+	}
+
 }
