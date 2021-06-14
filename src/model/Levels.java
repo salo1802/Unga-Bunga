@@ -12,6 +12,8 @@ public class Levels {
 	
 	private int changeLevel;
 	
+	private boolean change;
+	
 	private PApplet app;
 	private Obstacle obX;
 	private Dinasour dino;
@@ -29,45 +31,75 @@ public class Levels {
 		level1C = app.loadImage("data/nivel1C.png");
 		level1D = app.loadImage("data/nivel1D.png");
 		obstacles = new Obstacle[3];
-		changeLevel = 0; // 0 = C, 1 = D, 2 = A, 3 = B
+		changeLevel = 3; // 0 = C, 1 = D, 2 = A, 3 = B
 		
 		obX = new Obstacle(790, 620, 305, 180, app);
 		
-		obstacles[0] = new Obstacle(790, 620, 305, 300, app);
-		obstacles[1] = new Obstacle(1740, 620, 305, 300, app);
-		obstacles[2] = new Obstacle(1200, 470, 510, 160, app);
+		loadInitialLevel();
 		
 		dino = new Dinasour(1000, 750, 50, 1, app, 0);
 		thero = new Therodactyl(300, 100, 0, 5, app);
 	}
 	
+	private void loadInitialLevel() {
+		obstacles[0] = new Obstacle(790, 620, 305, 300, app);
+		obstacles[1] = new Obstacle(1740, 620, 305, 300, app);
+		obstacles[2] = new Obstacle(1200, 470, 510, 160, app);
+		
+	}
+
 	public void draw() {
 		
 		switch (changeLevel) {
 		case 0: // down left
 			app.image(level1C, 960, 450);
+			loadInitialLevel();
 			verifyTrex();
 			break;
 		case 1: // down right
 			app.image(level1D, 960, 450);
+			if(!change) {
+				updateLevel2();
+				change = true;
+			}
 			break;
 		case 2: // up left
 			app.image(level1A, 960, 450);
+				updateLevel1();		
 			break;
 		case 3: // up right
 			app.image(level1B, 960, 450);
+			updateLevel3();
 			break;
 
 		default:
 			break;
 		}
 		for (int i = 0; i < obstacles.length; i++) {
-			obstacles[i].drawObstacle();
+			//obstacles[i].drawObstacle();
 		}
 		
-		obX.drawObstacle();
+		//obX.drawObstacle();
 		dino.drawEenemy();
 		thero.drawEenemy();
+	}
+
+	private void updateLevel3() {
+		obstacles[0] = new Obstacle(875, 700, 1650, 160, app);
+		obstacles[1] = new Obstacle(520, 450, 305, 260, app);
+		obstacles[2] = new Obstacle(1280, 450, 305, 260, app);	
+	}
+
+	private void updateLevel2() {
+		obstacles[0] = new Obstacle(330, 225, 510, 160, app);
+		obstacles[1] = new Obstacle(625, 440, 510, 160, app);
+		obstacles[2] = new Obstacle(1325, 430, 710, 160, app);		
+	}
+
+	private void updateLevel1() {
+		obstacles[0] = new Obstacle(580, 585, 970, 160, app);
+		obstacles[1] = new Obstacle(1305, 515, 470, 160, app);
+		obstacles[2] = new Obstacle(0, 0, 0, 0, app);		
 	}
 
 	private void verifyTrex() {
