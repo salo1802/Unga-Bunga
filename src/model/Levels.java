@@ -47,7 +47,7 @@ public class Levels {
 		
 		changeEggTimer = 1200;
 		
-		changeLevel = 3; // 0 = C, 1 = D, 2 = A, 3 = B
+		changeLevel = 0; // 0 = C, 1 = D, 2 = A, 3 = B
 		
 		changeEggX = 1750;
 		changeEggY = 490;

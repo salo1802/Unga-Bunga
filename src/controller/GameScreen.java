@@ -226,8 +226,8 @@ public class GameScreen {
 		String r;
 		while((r = br.readLine()) != null) {
 			String[] g = r.split(",");
-			Player w = new Player(g[0], Integer.parseInt(g[1]), Integer.parseInt(g[2]), g[3]);
-			highscores.add(w);
+			//Player w = new Player(g[0], Integer.parseInt(g[1]), Integer.parseInt(g[2]), g[3]);
+			//highscores.add(w);
 			
 		}
 		
