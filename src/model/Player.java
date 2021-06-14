@@ -34,11 +34,14 @@ public class Player implements Comparable<Player>, Runnable{
 	private int normalForce;
 	private boolean test;
 	private boolean can;
+	private String gameDate;
+	private int playTime;
+	private String username;
 	
 	private GameScreen gameScreen;	
 	
 
-	public Player(int posX, int posY, int score, int lives, int vel, PApplet app, GameScreen gs) {
+	public Player(int posX, int posY, int score, int lives, int vel, PApplet app, GameScreen gs, String gameDate, int playTime, String username) {
 
 		this.app = app;
 		this.posX = posX;
@@ -46,6 +49,9 @@ public class Player implements Comparable<Player>, Runnable{
 		this.score = score;
 		this.lives = lives;
 		this.vel = vel;
+		this.gameDate = gameDate;
+		this.playTime = playTime;
+		this.username = username;
 		gameScreen = gs;
 		gravity = 3;
 		state = DEFAULT;
@@ -66,6 +72,16 @@ public class Player implements Comparable<Player>, Runnable{
 		imagesRunning = new PImage[4];
 		imagesRunningL = new PImage[4];
 		loadImages();
+	}
+	
+	
+
+	public Player(String username, int score, int playTime, String gameDate) {
+		super();
+		this.score = score;
+		this.gameDate = gameDate;
+		this.playTime = playTime;
+		this.username = username;
 	}
 	
 	private void loadImages() {
@@ -395,5 +411,28 @@ public class Player implements Comparable<Player>, Runnable{
 	}
 	public void setRightAnimation(boolean rightAnimation) {
 		this.rightAnimation = rightAnimation;
+	}
+	public String getGameDate() {
+		return gameDate;
+	}
+
+	public void setGameDate(String gameDate) {
+		this.gameDate = gameDate;
+	}
+
+	public int getPlayTime() {
+		return playTime;
+	}
+
+	public void setPlayTime(int playTime) {
+		this.playTime = playTime;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }
