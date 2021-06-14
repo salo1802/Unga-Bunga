@@ -20,5 +20,7 @@ public class EnterNameScreen {
 		app.image(nameScreen, 960, 450);
 		
 	}
+	
+	
 
 }
