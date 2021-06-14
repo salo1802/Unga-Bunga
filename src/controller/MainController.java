@@ -57,6 +57,9 @@ public class MainController {
 				gamescreen.calculatePlayTime();
 			}
 			
+			if(screen == 2 && gamescreen.getLevels().getEndGame() == 0) {
+				screen = 3;
+			}
 			
 			break;
 		case 3:

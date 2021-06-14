@@ -28,6 +28,7 @@ public class Levels {
 	private int changeEggX, changeEggY;
 	
 	private boolean toachEgg;
+	private int endGame;
 	
 	public Levels(PApplet app, Player p) {
 		
@@ -46,12 +47,13 @@ public class Levels {
 		
 		changeEggTimer = 1200;
 		
-		changeLevel = 0; // 0 = C, 1 = D, 2 = A, 3 = B
+		changeLevel = 3; // 0 = C, 1 = D, 2 = A, 3 = B
 		
 		changeEggX = 1750;
 		changeEggY = 490;
 		
 		toachEgg = false;
+		endGame = 10;
 		
 		/*obX = new Obstacle(790, 620, 305, 180, app);
 		pira = new Plant(-100, -200, 0, 0, app);
@@ -102,8 +104,8 @@ public class Levels {
 			}	
 			break;
 		case 2: // up left
-			setChangeEggX(1400);
-			setChangeEggY(360);
+			setChangeEggX(1790);
+			setChangeEggY(730);
 			
 			app.image(level1A, 960, 450);
 				updateLevel1();	
@@ -119,8 +121,8 @@ public class Levels {
 				}	
 			break;
 		case 3: // up right
-			setChangeEggX(1400);
-			setChangeEggY(360);
+			setChangeEggX(1600);
+			setChangeEggY(635);
 			
 			app.image(level1B, 960, 450);
 			updateLevel3();
@@ -166,7 +168,6 @@ public class Levels {
 				
 			if((int) PApplet.dist(player.getPosX(), player.getPosY(),
 					changeEggX, changeEggY) < 25) {
-				System.out.println("touch");
 				if(toachEgg == true) {
 					changeLevel = 2;
 					player.setPosX(100);
@@ -179,7 +180,6 @@ public class Levels {
 			
 			if((int) PApplet.dist(player.getPosX(), player.getPosY(),
 					changeEggX, changeEggY) < 25) {
-				System.out.println("touch");
 				if(toachEgg == true) {
 					changeLevel = 3;
 					player.setPosX(100);
@@ -193,7 +193,7 @@ public class Levels {
 			if((int) PApplet.dist(player.getPosX(), player.getPosY(),
 					changeEggX, changeEggY) < 25) {
 				System.out.println("touch");
-				
+				endGame = 0;
 			}
 		}
 	}
@@ -312,7 +312,13 @@ public class Levels {
 	public void setChangeEggTimer(int changeEggTimer) {
 		this.changeEggTimer = changeEggTimer;
 	}
-	
-	
 
+	public int getEndGame() {
+		return endGame;
+	}
+
+	public void setEndGame(int endGame) {
+		this.endGame = endGame;
+	}
+	
 }
