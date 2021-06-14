@@ -21,7 +21,7 @@ public class Dinasour extends Enemy implements EnemyCommonActions, Runnable{
 	public Dinasour(int posX, int posY, int value, int lives, PApplet app, int objX) {
 		super(posX, posY, value, lives, app);
 		this.objX = objX;
-		speed = 6;
+		speed = 4;
 		dinoPic = app.loadImage("data/trex.png");
 		
 		state = 1;
@@ -73,16 +73,56 @@ public class Dinasour extends Enemy implements EnemyCommonActions, Runnable{
 			}
 			break;
 		case 2:
+			if(dir) {
+				attackAnimationR();
+			}else {
+				attackAnimationL();
+			}
+			
+			break;
+		case 3:
 			break;
 		}
 		movement();
+	}
+
+	private void attackAnimationL() {
+		attackTimer++;
+		if(attackTimer >= 0 && attackTimer < 7) {
+			app.image(dinoAttackL[0], posX, posY);
+		}else if(attackTimer >= 7 && attackTimer < 14) {
+			app.image(dinoAttackL[1], posX, posY);
+		}if(attackTimer >= 14 && attackTimer <= 21) {
+			app.image(dinoAttackL[2], posX, posY);
+		}
+		
+		if(attackTimer == 21) {
+			attackTimer = 0;
+			state = 1;
+		}
+	}
+
+	private void attackAnimationR() {
+		attackTimer++;
+		if(attackTimer >= 0 && attackTimer < 7) {
+			app.image(dinoAttackR[0], posX, posY);
+		}else if(attackTimer >= 7 && attackTimer < 14) {
+			app.image(dinoAttackR[1], posX, posY);
+		}if(attackTimer >= 14 && attackTimer <= 21) {
+			app.image(dinoAttackR[2], posX, posY);
+		}
+		
+		if(attackTimer == 21) {
+			attackTimer = 0;
+			state = 1;
+		}
 	}
 
 	private void walkLAnimation() {
 		walTimer++;
 		if(walTimer >= 0 && walTimer < 12) {
 			app.image(dinoWalkL[0], posX, posY);
-		}else if(walTimer >= 12 && walTimer < 24) {
+		}else if(walTimer >= 12 && walTimer <= 24) {
 			app.image(dinoWalkL[1], posX, posY);
 		}
 		if(walTimer == 24) {
@@ -94,7 +134,7 @@ public class Dinasour extends Enemy implements EnemyCommonActions, Runnable{
 		walTimer++;
 		if(walTimer >= 0 && walTimer < 12) {
 			app.image(dinoWalkR[0], posX, posY);
-		}else if(walTimer >= 12 && walTimer < 24) {
+		}else if(walTimer >= 12 && walTimer <= 24) {
 			app.image(dinoWalkR[1], posX, posY);
 		}
 		if(walTimer == 24) {
@@ -104,6 +144,9 @@ public class Dinasour extends Enemy implements EnemyCommonActions, Runnable{
 
 	@Override
 	public void movement() {
+		if(Math.abs(posX-objX) < 200) {
+			state = 2;
+		}
 		if(posX < objX) {
 			posX+=speed;
 			dir = true;

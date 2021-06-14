@@ -17,7 +17,7 @@ public class Level1 {
 		
 		level1 = app.loadImage("data/nivel1.png");
 		obX = new Obstacle(500, 600, app);
-		dino = new Dinasour(700, 650, 50, 1, app, 0);
+		dino = new Dinasour(1000, 650, 50, 1, app, 0);
 		posX = 200;
 		posY = 200;
 	}
@@ -26,7 +26,7 @@ public class Level1 {
 		//app.fill(200);
 		//app.rect(0, 0, 3240, 1840);
 		
-		app.image(level1, 1000, 900);
+		//app.image(level1, 1000, 900);
 		obX.drawObstacle();
 		dino.drawEenemy();
 	}
