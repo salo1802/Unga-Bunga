@@ -32,6 +32,7 @@ public class Levels {
 		level1C = app.loadImage("data/nivel1C.png");
 		level1D = app.loadImage("data/nivel1D.png");
 		obstacles = new Obstacle[3];
+
 		changeLevel = 0; // 0 = C, 1 = D, 2 = A, 3 = B
 		
 		obX = new Obstacle(790, 620, 305, 180, app);

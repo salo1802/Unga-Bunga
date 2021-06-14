@@ -62,6 +62,13 @@ public class Plant extends Enemy implements EnemyCommonActions{
 	project.add(newAmo);
 	state = SHOOT;
 	attacktimer = 0;}
+	
+	for (int i = 0; i < project.size(); i++) {
+		
+		if(project.get(i).getPosX() > 1920 || project.get(i).getPosX() < 0) {
+			project.remove(i);
+			}
+		}
 	}
 
 	@Override
@@ -76,15 +83,15 @@ public class Plant extends Enemy implements EnemyCommonActions{
 	break;
 	case SHOOT:	
 	if(rightAnimation==true) {
-	if(attacktimer>=0&&attacktimer<1) {app.image(attack[0], posX, posY);}
-	if(attacktimer>=1&&attacktimer<3) {app.image(attack[1], posX, posY);}
-	if(attacktimer>=3) {app.image(attack[2], posX, posY);}}
+	if(attacktimer>=0&&attacktimer<3) {app.image(attack[0], posX, posY);}
+	if(attacktimer>=3&&attacktimer<6) {app.image(attack[1], posX, posY-5);}
+	if(attacktimer>=6) {app.image(attack[2], posX, posY);}}
 	if(rightAnimation==false) {
 		for(int i=0; i < attackL.length;i++) {
-			if(attacktimer>=0&&attacktimer<1) {app.image(attackL[0], posX, posY);}
-			if(attacktimer>=1&&attacktimer<3) {app.image(attackL[1], posX, posY);}
-			if(attacktimer>=3) {app.image(attackL[2], posX, posY);}}}
-	if(attacktimer==5) {	state=STILL;}
+			if(attacktimer>=0&&attacktimer<3) {app.image(attackL[0], posX, posY);}
+			if(attacktimer>=3&&attacktimer<6) {app.image(attackL[1], posX, posY-5);}
+			if(attacktimer>=6) {app.image(attackL[2], posX, posY);}}}
+	if(attacktimer==9) {	state=STILL;}
 		
 	break;
 	case DEATH:
@@ -145,5 +152,11 @@ public class Plant extends Enemy implements EnemyCommonActions{
 		return playerX;
 	}
 	
+	public ArrayList<PiraProject> getProject() {
+		return project;
+	}
+	public void setProject(ArrayList<PiraProject> project) {
+		this.project = project;
+	}
 	
 }

@@ -13,6 +13,7 @@ public class ScoreScreen {
 		
 		score = app.loadImage("data/highscoresScreen.png");
 		
+		
 	}
 	
 	public void draw() {

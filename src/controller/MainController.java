@@ -25,7 +25,7 @@ public class MainController {
 	public MainController(PApplet app) {
 		this.app = app;
 		
-		screen = 0;
+		screen = 3;
 		
 		logic = new Logic(app);
 		menuscreen = new MenuScreen(app);
