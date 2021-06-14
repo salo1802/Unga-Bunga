@@ -19,7 +19,7 @@ public class MainController {
 	public MainController(PApplet app) {
 		this.app = app;
 		
-		screen = 0;
+		screen = 2;
 		
 		menuscreen = new MenuScreen(app);
 		introscreen = new IntroScreen(app);
