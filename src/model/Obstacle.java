@@ -12,12 +12,12 @@ public class Obstacle {
 	
 	private boolean contact, visibility;
 	
-	public Obstacle(int posX, int posY, PApplet app) {
+	public Obstacle(int posX, int posY, int l, int h, PApplet app) {
 		this.posX = posX;
 		this.posY = posY;
 		this.app = app;
-		lenght = 400;
-		height = 200;
+		lenght = l;
+		height = h;
 		
 	}
 	

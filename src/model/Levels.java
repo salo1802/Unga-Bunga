@@ -3,7 +3,7 @@ package model;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Level1 {
+public class Levels {
 	
 	private PImage level1A; //up left
 	private PImage level1B; //up right
@@ -16,21 +16,29 @@ public class Level1 {
 	private Obstacle obX;
 	private Dinasour dino;
 	private Therodactyl thero;
+	private Player player;
+	private Obstacle[] obstacles;
 	
-	public Level1(PApplet app) {
+	public Levels(PApplet app, Player p) {
 		
+		player = p;
 		this.app = app;
 		
 		level1A = app.loadImage("data/nivel1A.png");
 		level1B = app.loadImage("data/nivel1B.png");
 		level1C = app.loadImage("data/nivel1C.png");
 		level1D = app.loadImage("data/nivel1D.png");
-		
+		obstacles = new Obstacle[3];
 		changeLevel = 0; // 0 = C, 1 = D, 2 = A, 3 = B
 		
-		obX = new Obstacle(500, 600, app);
-		dino = new Dinasour(1000, 650, 50, 1, app, 0);
-		thero = new Therodactyl(300, 50, 0, 5, app);
+		obX = new Obstacle(790, 620, 305, 180, app);
+		
+		obstacles[0] = new Obstacle(790, 620, 305, 300, app);
+		obstacles[1] = new Obstacle(1740, 620, 305, 300, app);
+		obstacles[2] = new Obstacle(1200, 470, 510, 160, app);
+		
+		dino = new Dinasour(1000, 750, 50, 1, app, 0);
+		thero = new Therodactyl(300, 100, 0, 5, app);
 	}
 	
 	public void draw() {
@@ -38,6 +46,7 @@ public class Level1 {
 		switch (changeLevel) {
 		case 0: // down left
 			app.image(level1C, 960, 450);
+			verifyTrex();
 			break;
 		case 1: // down right
 			app.image(level1D, 960, 450);
@@ -52,10 +61,20 @@ public class Level1 {
 		default:
 			break;
 		}
+		for (int i = 0; i < obstacles.length; i++) {
+			obstacles[i].drawObstacle();
+		}
 		
 		obX.drawObstacle();
 		dino.drawEenemy();
 		thero.drawEenemy();
+	}
+
+	private void verifyTrex() {
+		if(app.dist(player.getPosX(), player.getPosY(), dino.getPosX(), dino.getPosY()) < 50) {
+			player.setLives(player.getLives()-1);
+		}
+		
 	}
 
 	public Obstacle getObX() {
@@ -88,6 +107,14 @@ public class Level1 {
 
 	public void setChangeLevel(int changeLevel) {
 		this.changeLevel = changeLevel;
+	}
+
+	public Obstacle[] getObstacles() {
+		return obstacles;
+	}
+
+	public void setObstacles(Obstacle[] obstacles) {
+		this.obstacles = obstacles;
 	}
 
 }

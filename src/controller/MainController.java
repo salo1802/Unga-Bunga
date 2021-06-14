@@ -31,6 +31,7 @@ public class MainController {
 	
 	public void drawScreens() {
 		
+		
 		switch (screen) {
 		case 0:
 			menuscreen.draw();
@@ -40,6 +41,10 @@ public class MainController {
 			break;
 		case 2:
 			gamescreen.drawLevel();
+			if(gamescreen.getP().getLives() == 0) {
+				screen = 3;
+				gamescreen.getP().setLives(1);
+			}
 			break;
 		case 3:
 			namescreen.draw();
@@ -79,7 +84,14 @@ public class MainController {
 				&& mouseY > (730 - (100 / 2))
 				&& mouseY < (730 + (100 / 2))) {
 			screen = 2;
-
+		}
+		
+		//name Screen --> score Screen
+		if (screen == 3 && mouseX > (840 - (300 / 2))
+			&& mouseX < (840 + (300 / 2))
+			&& mouseY > (680 - (100 / 2))
+			&& mouseY < (680 + (100 / 2))) {
+			screen = 4;
 		}
 	}
 

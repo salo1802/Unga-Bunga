@@ -1,21 +1,16 @@
 package controller;
 
-import model.Level1;
-import model.Level2;
-import model.Level3;
+import model.Levels;
 import model.Player;
 import model.TheroProject;
 import model.Therodactyl;
 import processing.core.PApplet;
 
 public class GameScreen {
-	
 
 	private PApplet app;
 	
-	private Level1 level1;
-	private Level2 level2;
-	private Level3 level3;
+	private Levels level1;
 	
 	private Player p;
 
@@ -30,28 +25,17 @@ public class GameScreen {
 		this.app = app;
 		
 		levelNumber = 1; //1 = level 1, 2 = level 2, 3 = level 3
-		
-		level1 = new Level1(app);
-		level2 = new Level2(app);
-		level3 = new Level3(app);
-
 		p = new Player(50, 100, 0, 5, 3, app, this);
-		
+		level1 = new Levels(app, p);		
 	}
 	
 	public void drawLevel() {
+		
 		
 		switch (levelNumber) {
 		case 1:
 			level1.draw();
 			break;
-		case 2:
-			level2.draw();
-			break;
-		case 3:
-			level3.draw();
-			break;
-
 		default:
 			break;
 		}
@@ -60,27 +44,30 @@ public class GameScreen {
 		p.drawPlayer();
 		new Thread(p).start();
 		
-		int opx = level1.getObX().getPosX();
-		int length = level1.getObX().getLenght()/2;
-		int opy = level1.getObX().getPosY();
-		int height = level1.getObX().getHeight()/2;
-		int playerPX = p.getPosX();
-		int playerPY = p.getPosY();
-		
-		if(moveL) {					
-			if(playerPX-5 < opx+length && playerPY < opy+height && playerPY > opy-height && playerPX > opx-length) {
-				
-			}else {
-				p.movement(-5);
-			}			
-		}
-		if(moveR) {
-			if(playerPX+5 > opx-length && playerPY < opy+height && playerPY > opy-height && playerPX < opx+length) {
-				
-			}else {
-				p.movement(5);
+		for (int i = 0; i < getLevels().getObstacles().length; i++) {
+			int opx = level1.getObstacles()[i].getPosX();
+			int length = level1.getObstacles()[i].getLenght()/2;
+			int opy = level1.getObstacles()[i].getPosY();
+			int height = level1.getObstacles()[i].getHeight()/2;
+			int playerPX = p.getPosX();
+			int playerPY = p.getPosY();
+			
+			if(moveL) {					
+				if(playerPX-5 < opx+length && playerPY < opy+height && playerPY > opy-height && playerPX > opx-length) {
+					
+				}else {
+					p.movement(-2);
+				}			
+			}
+			if(moveR) {
+				if(playerPX+5 > opx-length && playerPY < opy+height && playerPY > opy-height && playerPX < opx+length) {
+					
+				}else {
+					p.movement(2);
+				}
 			}
 		}
+		
 		
 		damagePlayer();
 		
@@ -124,11 +111,11 @@ public class GameScreen {
 		this.moveL = moveL;
 	}
 
-	public Level1 getLevel1() {
+	public Levels getLevels() {
 		return level1;
 	}
 
-	public void setLevel1(Level1 level1) {
+	public void setLevels(Levels level1) {
 		this.level1 = level1;
 	}
 	

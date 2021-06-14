@@ -23,7 +23,7 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 	public Therodactyl(int posX, int posY, int value, int lives, PApplet app) {
 		super(posX, posY, value, lives, app);
 		
-		changeTime = 60;
+		changeTime = 240;
 		dirX = (int) app.random(1, 2);
 		speed = 5;
 		
@@ -112,9 +112,9 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 		movement();
 		
 		changeTime ++;
-		if(changeTime == 60) {
+		if(changeTime == 240) {
 			dirX = 1;
-		}else if(changeTime == 120) {
+		}else if(changeTime == 480) {
 			dirX = 2;
 			changeTime = 0;
 		}

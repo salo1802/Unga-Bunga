@@ -29,7 +29,7 @@ public class Main extends PApplet{
 	@Override
 	public void draw() {
 		
-		System.out.println(mouseX + "," + mouseY);
+		//System.out.println(mouseX + "," + mouseY);
 		
 		imageMode(CENTER);
 		rectMode(CENTER);
@@ -70,7 +70,7 @@ public class Main extends PApplet{
 			break;
 		}
 		//update dinos objective
-		controller.getGamescreen().getLevel1().getDino().setObjX(controller.getGamescreen().getP().getPosX());
+		controller.getGamescreen().getLevels().getDino().setObjX(controller.getGamescreen().getP().getPosX());
 	}
 	
 	@Override
