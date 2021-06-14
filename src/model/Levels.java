@@ -58,7 +58,7 @@ public class Levels {
 		switch (changeLevel) {
 		case 0: // down left
 			app.image(level1C, 960, 450);
-			loadInitialLevel();
+			//loadInitialLevel();
 			verifyTrex();
 			break;
 		case 1: // down right

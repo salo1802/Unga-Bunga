@@ -3,6 +3,8 @@ package controller;
 import model.EmptyFieldException;
 import model.InvalidInputException;
 import model.Logic;
+import model.Player;
+import model.RepeatedUserException;
 import processing.core.PApplet;
 import processing.core.PImage;
 import controlP5.ControlP5;
@@ -75,7 +77,7 @@ public class EnterNameScreen {
 		this.username = username;
 	}
 
-	public boolean verifyInputText() throws EmptyFieldException, InvalidInputException {
+	public boolean verifyInputText() throws EmptyFieldException, InvalidInputException, RepeatedUserException {
 		boolean added = true;
 		
 		if(username.isEmpty()) {
@@ -84,9 +86,19 @@ public class EnterNameScreen {
 		if(username.length() > NAME_LENGTH) {
 			throw new InvalidInputException(NAME_LENGTH, username.length());
 		}
-		//Player p = logic.searchPlayer(username);
+		Player p = logic.searchPlayer(username);
+		if(p != null) {
+			throw new RepeatedUserException(username);
+		}
 		
 		return added;
+	}
+
+
+	public String getText() {
+		String t = "";
+		t = cp5.get(Textfield.class, "txtUser").getText();
+		return t;
 	}
 
 
