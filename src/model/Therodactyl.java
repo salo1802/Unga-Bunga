@@ -11,9 +11,11 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 	
 	private int dirX;
 	private int speed;
+	private boolean death;
 	
-	private PImage thero;
-	private PImage theroLeft;
+	private PImage[] thero;
+	private PImage[] theroLeft;
+	private PImage[] theroDeath;
 	
 	private ArrayList<TheroProject> theroProject;
 	private int eggTimer;
@@ -25,16 +27,23 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 		dirX = (int) app.random(1, 2);
 		speed = 5;
 		
-		thero = app.loadImage("data/pterodactyl.png");
-		theroLeft = app.loadImage("data/pterodactylL.png");
+		thero = new PImage[1];
+		theroLeft = new PImage[1];
+		theroDeath = new PImage[2];
+		
+		//thero = app.loadImage("data/pterodactyl.png");
+		//theroLeft = app.loadImage("data/pterodactylL.png");
 		
 		theroProject = new ArrayList<TheroProject>();
 		eggTimer = 60;
 		
+		this.lives = 2;
+		this.death = false;
 	}
 	
-	public void actions() { // add eggs
+	public void actions() {
 		
+		if(death = false) { // add and stop adding eggs
 		eggTimer --;
 		if(eggTimer <= 0) {
 			
@@ -45,13 +54,23 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 			eggTimer = 60;
 			}
 		
-		for (int i = 0; i < theroProject.size(); i++) {
+		for (int i = 0; i < theroProject.size(); i++) { //delete egg if go beyond Y
 			
 			if(theroProject.get(i).getPosY() > 920) {
 				theroProject.remove(i);
 			}
 		}
 		}
+		
+		//Dearth of therodactyl
+		if(lives == 0) {
+			death = true;
+		}
+		
+		if(death) {
+			dirX = 3;
+		}
+	}
 
 	@Override
 	public void drawEenemy() {
@@ -66,11 +85,14 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 		app.ellipse(posX, posY, 100, 25);
 		
 		switch (dirX) {
-		case 1:
-			app.image(thero, posX, posY, 200, 90);
+		case 1: // RIGHT
+			//app.image(thero, posX, posY, 200, 90);
 			break;
-		case 2:
-			app.image(theroLeft, posX, posY, 200, 90);
+		case 2: // LEFT
+			//app.image(theroLeft, posX, posY, 200, 90);
+			break;
+		case 3: // DEATH
+			//app.image(thero, posX, posY, 200, 90);
 			break;
 
 		default:
@@ -94,11 +116,14 @@ public class Therodactyl extends Enemy implements EnemyCommonActions{
 		
 
 		switch (dirX) {
-		case 1:
+		case 1: // RIGHT
 			posX += speed;
 			break;
-		case 2:
+		case 2: // LEFT
 			posX -= speed;
+			break;
+		case 3: // DEATH
+			posY += speed;
 			break;
 
 		default:
