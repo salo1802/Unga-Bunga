@@ -5,6 +5,7 @@ import model.Dinasour;
 import model.Obstacle;
 import model.Player;
 import processing.core.PApplet;
+import processing.event.MouseEvent;
 
 public class Main extends PApplet{
 
@@ -17,7 +18,7 @@ public class Main extends PApplet{
 	
 	@Override
 	public void settings() {
-		size(1080,920);
+		size(1920,900);
 	}
 	
 	@Override
@@ -78,6 +79,7 @@ public class Main extends PApplet{
 			break;
 		}
 		//update dinos objective
+		controller.getGamescreen().getLevel1().getDino().setObjX(controller.getGamescreen().getP().getPosX());
 	}
 	
 	@Override
@@ -90,6 +92,10 @@ public class Main extends PApplet{
 			controller.getGamescreen().setMoveR(false);
 			break;
 		}
+	}
+	
+	public void mouseWheel(MouseEvent event) {
+		
 	}
 	
 	@Override
